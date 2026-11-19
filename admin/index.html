@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة التحكم — Mo Albera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+body{min-height:100vh}
+.shell{width:min(1180px,100% - 32px);margin:0 auto;padding:100px 0 140px}
+.top{position:fixed;top:14px;inset-inline:0;z-index:50;display:flex;justify-content:center;padding:0 16px}
+.top-in{width:min(1180px,100%);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 8px 8px 16px;border-radius:999px}
+.top .logo{padding:0 8px}
+.top .acts{display:flex;gap:8px;align-items:center}
+.btn.sm{height:42px;padding:0 18px;font-size:14px}
+.dirty{font-size:13px;color:var(--orange);display:none;white-space:nowrap}
+.dirty.on{display:inline}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0 34px}
+.tabs button{padding:10px 20px;border-radius:999px;color:var(--muted);font:inherit;font-size:14px;cursor:pointer;transition:.25s}
+.tabs button.on{background:#fff;color:#000;border-color:#fff}
+.panel{border-radius:28px;padding:clamp(18px,3vw,30px);margin-bottom:22px}
+.panel h3{font-size:22px;font-weight:600;margin-bottom:4px}
+.panel .sub{color:var(--muted);font-size:14px;margin-bottom:20px;font-weight:300}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:14px}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+input[type=text],input[type=number],input[type=url],input[type=password],textarea,select{
+  width:100%;font:inherit;font-size:15px;color:var(--text);background:rgba(0,0,0,.45);border:1px solid var(--stroke-2);
+  border-radius:16px;padding:12px 16px;outline:none;transition:border-color .2s}
+textarea{min-height:96px;resize:vertical;line-height:1.7}
+input:focus,textarea:focus,select:focus{border-color:rgba(255,255,255,.6)}
+select option{background:#111}
+.hint{font-size:12px;color:var(--dim)}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.it{border-radius:22px;padding:10px;display:flex;flex-direction:column;gap:10px}
+.thumb{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:808/632;background:#111;cursor:pointer}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb span{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.55);opacity:0;transition:.25s;font-size:14px}
+.thumb:hover span{opacity:1}
+.it .fields{display:flex;flex-direction:column;gap:8px;padding:0 4px}
+.it .fields .two{display:grid;grid-template-columns:90px 1fr;gap:8px}
+.it input,.it select{padding:9px 12px;font-size:14px;border-radius:12px}
+.tools{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.ib{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;cursor:pointer;color:var(--text);font-size:15px;font-family:inherit;transition:.2s}
+.ib:hover{border-color:var(--stroke-2)}
+.ib.del:hover{color:#ff6b6b;border-color:#ff6b6b}
+.add{border:1.5px dashed var(--stroke-2);border-radius:22px;display:grid;place-items:center;min-height:220px;cursor:pointer;color:var(--muted);font-size:15px;transition:.25s;background:transparent;font-family:inherit}
+.add:hover{color:#fff;border-color:#fff}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.list-row{display:grid;grid-template-columns:1fr 2fr auto;gap:10px;align-items:start;margin-bottom:10px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;z-index:300;padding:14px 24px;border-radius:999px;font-size:15px;transition:.35s;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.busy{position:fixed;inset:0;z-index:250;background:rgba(0,0,0,.6);display:none;place-items:center;font-size:17px}
+.busy.on{display:grid}
+.spinner{width:42px;height:42px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;animation:sp 1s linear infinite;margin:0 auto 16px}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* login */
+.login{max-width:640px;margin:8vh auto 0;border-radius:36px;padding:clamp(24px,5vw,48px)}
+.login h1{font-size:clamp(30px,5vw,44px);font-weight:600;letter-spacing:-.02em;margin:18px 0 8px}
+.login ol{margin:18px 0 24px;padding-inline-start:22px;color:var(--muted);font-size:15px}
+.login ol li{margin-bottom:8px}
+.login ol b{color:#fff;font-weight:500}
+.login a.lnk{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.err{color:#ff8b8b;font-size:14px;margin-top:10px;min-height:20px}
+.check{display:flex;align-items:center;gap:10px;font-size:15px;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:#fff}
+@media (max-width:760px){
+  .top-in{border-radius:24px;flex-wrap:wrap}
+  .top .logo span{display:none}
+  .list-row{grid-template-columns:1fr}
+  .shell{padding-top:120px}
+}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <filter id="b1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+      <filter id="b3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+      <linearGradient id="go" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff7a1a" stop-opacity="0"/><stop offset=".5" stop-color="#ff8a2a"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></linearGradient>
+      <linearGradient id="gs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fb3d9" stop-opacity="0"/><stop offset=".5" stop-color="#c9d6ee"/><stop offset="1" stop-color="#5b6c8e" stop-opacity="0"/></linearGradient>
+    </defs>
+    <g class="spin2"><ellipse cx="500" cy="500" rx="330" ry="150" fill="#1b2235" filter="url(#b3)" opacity=".9" transform="rotate(-18 500 500)"/></g>
+    <g class="spin">
+      <path d="M170 560 C 300 380, 520 330, 700 420 S 880 600, 760 640" fill="none" stroke="url(#gs)" stroke-width="70" filter="url(#b1)" opacity=".45"/>
+      <path d="M260 470 C 420 360, 600 360, 760 480" fill="none" stroke="url(#go)" stroke-width="26" filter="url(#b1)" opacity=".55"/>
+    </g>
+  </svg>
+</div>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- LOGIN -->
+<div class="shell" id="loginView" style="display:none">
+  <div class="login glass">
+    <span class="pill glass"><span class="dot"></span>لوحة التحكم</span>
+    <h1>أهلاً محمد 👋</h1>
+    <p style="color:var(--muted)">باش تدخل للوحة، تحتاج <b style="color:#fff">مفتاح دخول</b> من GitHub. تديره مرة وحدة بس، واللوحة تتذكره على الجهاز هذا.</p>
+    <ol>
+      <li>افتح الرابط هذا: <a class="lnk" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">إنشاء مفتاح جديد</a></li>
+      <li>في خانة <b>Token name</b> اكتب: <b>لوحة التحكم</b></li>
+      <li>في <b>Expiration</b> اختار أطول مدة متاحة.</li>
+      <li>في <b>Repository access</b> اختار <b>Only select repositories</b> وبعدين اختار <b>moalbera.github.io</b></li>
+      <li>في <b>Permissions</b> اضغط <b>Add permissions</b> واختار <b>Contents</b>، وبعدين بدّلها لـ <b>Read and write</b></li>
+      <li>انزل لتحت واضغط <b>Generate token</b>، وانسخ المفتاح (يبدأ بـ <span class="ltr">github_pat_</span>)</li>
+      <li>الصقه هني تحت واضغط دخول.</li>
+    </ol>
+    <input type="password" id="tokIn" placeholder="github_pat_..." autocomplete="off" dir="ltr">
+    <div class="err" id="loginErr"></div>
+    <div style="margin-top:14px"><button class="btn btn-white" id="loginBtn" style="width:100%">دخول</button></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="appView" style="display:none">
+  <div class="top">
+    <div class="top-in glass">
+      <a class="logo" href="../" target="_blank" rel="noopener"><i>M</i><span>لوحة التحكم</span></a>
+      <div class="acts">
+        <span class="dirty" id="dirty">● فيه تعديلات ما تحفظتش</span>
+        <a class="btn btn-glass sm" href="../" target="_blank" rel="noopener">شوف الموقع</a>
+        <button class="btn btn-white sm" id="saveBtn">حفظ ونشر</button>
+        <button class="ib glass" id="logoutBtn" title="خروج">⎋</button>
+      </div>
+    </div>
+  </div>
+  <div class="shell">
+    <div class="tabs" id="tabs"></div>
+    <div id="view"></div>
+  </div>
+</div>
+
+<input type="file" id="filePick" accept="image/*" hidden>
+<div class="busy" id="busy"><div style="text-align:center"><div class="spinner"></div><div id="busyTxt">لحظة…</div></div></div>
+<div class="toast glass" id="toast"></div>
+
+<script>
+const REPO='moalbera/moalbera.github.io', BR='main', KEY='mo_admin_token';
+let TOK=localStorage.getItem(KEY)||'', D=null, SHA=null, dirty=false, TAB='works';
+const previews={};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- GitHub API ---------- */
+async function gh(path,opt={}){
+  const r=await fetch('https://api.github.com/repos/'+REPO+path,{...opt,headers:{Authorization:'Bearer '+TOK,Accept:'application/vnd.github+json',...(opt.body?{'Content-Type':'application/json'}:{})}});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok){const e=new Error(j.message||r.status);e.status=r.status;throw e;}
+  return j;
+}
+const b64enc=str=>{const b=new TextEncoder().encode(str);let s='';for(let i=0;i<b.length;i+=0x8000)s+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));return btoa(s);};
+const b64dec=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g,'')),c=>c.charCodeAt(0)));
+
+async function loadData(){
+  const j=await gh('/contents/data.json?ref='+BR+'&t='+Date.now());
+  SHA=j.sha; D=JSON.parse(b64dec(j.content));
+}
+async function saveData(){
+  busy(true,'جاري الحفظ والنشر…');
+  try{
+    const j=await gh('/contents/data.json',{method:'PUT',body:JSON.stringify({message:'تحديث محتوى الموقع من لوحة التحكم',content:b64enc(JSON.stringify(D,null,2)+'\n'),sha:SHA,branch:BR})});
+    SHA=j.content.sha; setDirty(false);
+    toast('تم الحفظ ✅ التعديلات تبان على الموقع خلال دقيقة تقريباً');
+  }catch(e){
+    if(e.status===409) toast('صار تعديل من مكان ثاني. حدّث الصفحة وعاود.',true);
+    else if(e.status===403||e.status===404) toast('المفتاح ما عندهش صلاحية الكتابة (Contents: Read and write).',true);
+    else toast('ما قدرناش نحفظ: '+e.message,true);
+  }finally{busy(false);}
+}
+async function uploadImage(file){
+  const dataUrl=await resize(file,1800,.88);
+  const name='work/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.jpg';
+  await gh('/contents/'+name,{method:'PUT',body:JSON.stringify({message:'رفع صورة من لوحة التحكم',content:dataUrl.split(',')[1],branch:BR})});
+  previews[name]=dataUrl;
+  return name;
+}
+function resize(file,max,q){
+  return new Promise((res,rej)=>{
+    const img=new Image(), url=URL.createObjectURL(file);
+    img.onload=()=>{let w=img.naturalWidth,h=img.naturalHeight;const s=Math.min(1,max/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);
+      const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);
+      URL.revokeObjectURL(url);res(c.toDataURL('image/jpeg',q));};
+    img.onerror=()=>rej(new Error('الصورة ما تفتحتش'));img.src=url;});
+}
+const src=p=>previews[p]||('../'+p);
+
+/* ---------- helpers ---------- */
+function busy(on,t){$('#busy').classList.toggle('on',on);if(t)$('#busyTxt').textContent=t;}
+let tt;function toast(m,bad){const t=$('#toast');t.textContent=m;t.style.color=bad?'#ff9b9b':'';t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),4500);}
+function setDirty(v){dirty=v;$('#dirty').classList.toggle('on',v);}
+addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
+const getP=(p)=>p.split('.').reduce((a,k)=>a?.[k],D);
+function setP(p,v){const ks=p.split('.');const last=ks.pop();const o=ks.reduce((a,k)=>a[k],D);o[last]=v;}
+function move(arr,i,d){const j=i+d;if(j<0||j>=arr.length)return;[arr[i],arr[j]]=[arr[j],arr[i]];setDirty(true);draw();}
+function pickFiles(multiple){return new Promise(res=>{const f=$('#filePick');f.multiple=!!multiple;f.value='';f.onchange=()=>res([...f.files]);f.click();});}
+async function uploadMany(files){const out=[];for(let i=0;i<files.length;i++){busy(true,`جاري رفع الصورة ${i+1} من ${files.length}…`);out.push(await uploadImage(files[i]));}busy(false);return out;}
+async function withUpload(multiple,fn){
+  const files=await pickFiles(multiple); if(!files.length)return;
+  try{const paths=await uploadMany(files);fn(paths);setDirty(true);draw();toast('الصورة ترفعت ✅ لا تنساش تضغط "حفظ ونشر"');}
+  catch(e){busy(false);toast('ما قدرناش نرفع الصورة: '+e.message,true);}
+}
+
+// input binding
+document.addEventListener('input',e=>{const el=e.target;const p=el.dataset.p;if(!p)return;
+  let v=el.type==='checkbox'?el.checked:el.value; if(el.dataset.num!==undefined)v=v===''?'':Number(v);
+  if(el.dataset.lines!==undefined)v=el.value.split('\n').map(s=>s.trim()).filter(Boolean);
+  setP(p,v);setDirty(true);});
+const inp=(p,label,o={})=>`<label class="f">${label}<input type="${o.type||'text'}" data-p="${p}" ${o.num?'data-num':''} value="${esc(getP(p))}" ${o.ltr?'dir="ltr"':''} placeholder="${esc(o.ph||'')}"></label>`;
+const ta=(p,label,hint='')=>`<label class="f">${label}<textarea data-p="${p}">${esc(getP(p))}</textarea>${hint?`<span class="hint">${hint}</span>`:''}</label>`;
+
+/* ---------- TABS ---------- */
+const TABS=[['works','الأعمال'],['featured','المشروع المميز'],['texts','النصوص الرئيسية'],['services','الخدمات وطريقة الشغل'],['about','عني'],['contact','التواصل']];
+function drawTabs(){$('#tabs').innerHTML=TABS.map(([k,t])=>`<button class="glass ${k===TAB?'on':''}" data-tab="${k}">${t}</button>`).join('');}
+$('#tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;TAB=b.dataset.tab;draw();scrollTo(0,0);};
+function draw(){drawTabs();$('#view').innerHTML=V[TAB]();}
+
+const V={
+works(){
+  const cats=D.categories;
+  return `<div class="bar"><div><h3 style="font-size:26px;font-weight:600">الأعمال</h3><div class="sub" style="margin:0">كل قسم يظهر في الموقع بنفس الترتيب هذا. أول تصميم في القسم يطلع في الأول.</div></div></div>`+
+  cats.map((c,ci)=>`<div class="panel glass">
+    <div class="bar"><h3>${esc(c.title)||'قسم بدون اسم'} <span class="hint">(${c.items.length} تصميم)</span></h3>
+      <div class="tools">
+        <button class="btn btn-glass sm" data-act="sortYear" data-c="${ci}">رتّب من الأحدث للأقدم</button>
+        <button class="ib glass" data-act="catUp" data-c="${ci}" title="طلّع القسم لفوق">↑</button>
+        <button class="ib glass" data-act="catDown" data-c="${ci}" title="نزّل القسم لتحت">↓</button>
+        <button class="ib glass del" data-act="catDel" data-c="${ci}" title="امسح القسم">🗑</button>
+      </div></div>
+    <div class="row">${inp(`categories.${ci}.title`,'اسم القسم (عربي)')}${inp(`categories.${ci}.en`,'اسم القسم (إنجليزي)',{ltr:1})}${inp(`categories.${ci}.desc`,'وصف قصير')}</div>
+    <div class="items">
+      <button class="add" data-act="addItems" data-c="${ci}">＋ أضف تصميم جديد<br><span class="hint">تقدر تختار أكثر من صورة مع بعض</span></button>
+      ${c.items.map((w,ii)=>`<div class="it glass">
+        <div class="thumb" data-act="replaceImg" data-c="${ci}" data-i="${ii}"><img src="${esc(src(w.img))}" alt="" loading="lazy"><span>بدّل الصورة</span></div>
+        <div class="fields">
+          <input type="text" data-p="categories.${ci}.items.${ii}.title" value="${esc(w.title)}" placeholder="اسم التصميم">
+          <div class="two"><input type="number" data-num data-p="categories.${ci}.items.${ii}.year" value="${esc(w.year)}" placeholder="السنة"><input type="url" dir="ltr" data-p="categories.${ci}.items.${ii}.link" value="${esc(w.link)}" placeholder="رابط Behance (اختياري)"></div>
+          <select data-act="moveCat" data-c="${ci}" data-i="${ii}">${cats.map((x,k)=>`<option value="${k}" ${k===ci?'selected':''}>القسم: ${esc(x.title)}</option>`).join('')}</select>
+        </div>
+        <div class="tools">
+          <button class="ib glass" data-act="itUp" data-c="${ci}" data-i="${ii}" title="قدّم">→</button>
+          <button class="ib glass" data-act="itDown" data-c="${ci}" data-i="${ii}" title="أخّر">←</button>
+          <button class="ib glass del" data-act="itDel" data-c="${ci}" data-i="${ii}" title="امسح">🗑</button>
+        </div></div>`).join('')}
+    </div></div>`).join('')+
+  `<button class="add" style="min-height:120px;width:100%" data-act="addCat">＋ أضف قسم جديد</button>`;
+},
+featured(){
+  const F=D.featured;
+  return `<div class="panel glass"><h3>المشروع المميز</h3><div class="sub">المشروع الكبير اللي يظهر في أول قسم الأعمال.</div>
+    <label class="check" style="margin-bottom:18px"><input type="checkbox" data-p="featured.show" ${F.show?'checked':''}> اعرض المشروع المميز في الموقع</label>
+    <div class="row">${inp('featured.title','اسم المشروع')}${inp('featured.subtitle','العنوان الفرعي')}</div>
+    <div class="row">${inp('featured.label','الشارة البيضاء (مثلاً: الأحدث)')}${inp('featured.year','السنة',{type:'number',num:1})}${inp('featured.tag','نوع المشروع')}</div>
+    ${ta('featured.text','وصف المشروع')}
+  </div>
+  <div class="panel glass"><h3>الصورة الرئيسية</h3><div class="sub">اضغط على الصورة باش تبدّلها.</div>
+    <div style="max-width:520px"><div class="thumb" data-act="featCover" style="aspect-ratio:auto"><img src="${esc(src(F.cover))}" alt=""><span>بدّل الصورة</span></div></div>
+  </div>
+  <div class="panel glass"><h3>صور المشروع</h3><div class="sub">الصور الصغيرة اللي تحت الصورة الرئيسية.</div>
+    <div class="items">
+      <button class="add" data-act="featAdd">＋ أضف صور</button>
+      ${(F.gallery||[]).map((g,i)=>`<div class="it glass">
+        <div class="thumb" data-act="featReplace" data-i="${i}"><img src="${esc(src(g.img))}" alt=""><span>بدّل الصورة</span></div>
+        <div class="fields"><input type="text" data-p="featured.gallery.${i}.caption" value="${esc(g.caption)}" placeholder="وصف الصورة"></div>
+        <div class="tools"><button class="ib glass" data-act="gUp" data-i="${i}">→</button><button class="ib glass" data-act="gDown" data-i="${i}">←</button><button class="ib glass del" data-act="gDel" data-i="${i}">🗑</button></div>
+      </div>`).join('')}
+    </div></div>`;
+},
+texts(){
+  return `<div class="panel glass"><h3>أول الصفحة</h3><div class="sub">الكلام اللي يشوفه الزائر أول ما يفتح الموقع.</div>
+    <div class="row">${inp('site.name','الاسم الكبير',{ltr:1})}${inp('site.status','الشارة الصغيرة فوق')}</div>
+    ${inp('site.headline','العنوان')}<div style="height:14px"></div>
+    ${ta('site.intro','النبذة تحت العنوان')}
+    <div class="row" style="margin-top:14px">${inp('site.ctaWork','زر الأعمال')}${inp('site.ctaOrder','زر الطلب')}</div>
+  </div>
+  <div class="panel glass"><h3>قسم الأعمال وآخر الصفحة</h3>
+    <div class="row">${inp('site.workTitle','عنوان قسم الأعمال')}${inp('site.workIntro','الجملة تحت عنوان الأعمال')}</div>
+    <div class="row">${inp('site.footerText','كلام الفوتر')}${inp('site.ghostWord','الكلمة الكبيرة في آخر الصفحة',{ltr:1})}</div>
+  </div>`;
+},
+services(){
+  const list=(arr,key,label)=>arr.map((s,i)=>`<div class="list-row">
+      <input type="text" data-p="${key}.${i}.title" value="${esc(s.title)}" placeholder="العنوان">
+      <textarea data-p="${key}.${i}.text" style="min-height:60px" placeholder="الوصف">${esc(s.text)}</textarea>
+      <div class="tools"><button class="ib glass" data-act="lUp" data-k="${key}" data-i="${i}">↑</button><button class="ib glass" data-act="lDown" data-k="${key}" data-i="${i}">↓</button><button class="ib glass del" data-act="lDel" data-k="${key}" data-i="${i}">🗑</button></div>
+    </div>`).join('')+`<button class="btn btn-glass sm" data-act="lAdd" data-k="${key}">＋ ${label}</button>`;
+  return `<div class="panel glass"><h3>الخدمات</h3><div class="sub">"شنو نقدّم لك"</div>${ta('servicesIntro','الجملة تحت العنوان')}<div style="height:16px"></div>${list(D.services,'services','أضف خدمة')}</div>
+  <div class="panel glass"><h3>طريقة الشغل</h3><div class="sub">"كيف نشتغلوا"</div>${list(D.steps,'steps','أضف خطوة')}</div>`;
+},
+about(){
+  return `<div class="panel glass"><h3>عني</h3><div class="sub">حط أي كلمة بين [[ ]] باش تطلع ملوّنة بالبرتقالي. مثال: [[محمد البيرة]]</div>
+    ${ta('about.text','النبذة')}
+    <div style="height:14px"></div>${inp('about.brandsLabel','عنوان قائمة العلامات')}
+    <div style="height:14px"></div>
+    <label class="f">العلامات والمشاريع (كل وحدة في سطر)<textarea data-p="about.brands" data-lines style="min-height:200px" dir="ltr">${esc((D.about.brands||[]).join('\n'))}</textarea></label>
+  </div>`;
+},
+contact(){
+  return `<div class="panel glass"><h3>التواصل</h3>
+    <div class="row">${inp('contact.title','العنوان')}</div>${ta('contact.text','الكلام تحت العنوان')}
+    <div class="row" style="margin-top:14px">${inp('contact.whatsapp','رقم الواتساب الدولي (بدون +)',{ltr:1,ph:'218945345203'})}${inp('contact.phoneDisplay','الرقم زي ما يبان للناس',{ltr:1})}${inp('contact.email','الإيميل',{ltr:1})}</div>
+    <div class="row">${inp('contact.behance','رابط Behance',{ltr:1})}${inp('contact.instagram','رابط Instagram',{ltr:1})}${inp('contact.facebook','رابط Facebook',{ltr:1})}</div>
+  </div>`;
+}};
+
+/* ---------- ACTIONS ---------- */
+document.addEventListener('change',e=>{const el=e.target;if(el.dataset.act!=='moveCat')return;
+  const ci=+el.dataset.c,ii=+el.dataset.i,to=+el.value;const [w]=D.categories[ci].items.splice(ii,1);D.categories[to].items.unshift(w);setDirty(true);draw();toast('التصميم تنقل لأول القسم الجديد');});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='SELECT')return;
+  const a=b.dataset.act,ci=+b.dataset.c,ii=+b.dataset.i,C=D.categories[ci],F=D.featured;
+  switch(a){
+    case 'addItems': withUpload(true,ps=>C.items.unshift(...ps.map(p=>({img:p,title:'تصميم جديد',year:new Date().getFullYear(),link:''}))));break;
+    case 'replaceImg': withUpload(false,ps=>C.items[ii].img=ps[0]);break;
+    case 'itUp': move(C.items,ii,-1);break;
+    case 'itDown': move(C.items,ii,1);break;
+    case 'itDel': if(confirm('متأكد تبي تمسح "'+C.items[ii].title+'"؟')){C.items.splice(ii,1);setDirty(true);draw();}break;
+    case 'sortYear': C.items.sort((x,y)=>(+y.year||0)-(+x.year||0));setDirty(true);draw();toast('ترتّب من الأحدث للأقدم');break;
+    case 'catUp': move(D.categories,ci,-1);break;
+    case 'catDown': move(D.categories,ci,1);break;
+    case 'catDel': if(confirm(C.items.length?`القسم فيه ${C.items.length} تصميم، كلهم حيتمسحوا. متأكد؟`:'متأكد تبي تمسح القسم؟')){D.categories.splice(ci,1);setDirty(true);draw();}break;
+    case 'addCat': D.categories.push({title:'قسم جديد',en:'',desc:'',items:[]});setDirty(true);draw();scrollTo(0,document.body.scrollHeight);break;
+    case 'featCover': withUpload(false,ps=>F.cover=ps[0]);break;
+    case 'featAdd': withUpload(true,ps=>{F.gallery=F.gallery||[];F.gallery.push(...ps.map(p=>({img:p,caption:''})));});break;
+    case 'featReplace': withUpload(false,ps=>F.gallery[ii].img=ps[0]);break;
+    case 'gUp': move(F.gallery,ii,-1);break;
+    case 'gDown': move(F.gallery,ii,1);break;
+    case 'gDel': if(confirm('تمسح الصورة هذي؟')){F.gallery.splice(ii,1);setDirty(true);draw();}break;
+    case 'lUp': move(D[b.dataset.k],ii,-1);break;
+    case 'lDown': move(D[b.dataset.k],ii,1);break;
+    case 'lDel': if(confirm('متأكد؟')){D[b.dataset.k].splice(ii,1);setDirty(true);draw();}break;
+    case 'lAdd': D[b.dataset.k].push({title:'',text:''});setDirty(true);draw();break;
+  }});
+
+$('#saveBtn').onclick=saveData;
+addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='s'){e.preventDefault();if(D)saveData();}});
+$('#logoutBtn').onclick=()=>{if(dirty&&!confirm('فيه تعديلات ما تحفظتش. تطلع؟'))return;localStorage.removeItem(KEY);dirty=false;location.reload();};
+
+/* ---------- LOGIN ---------- */
+async function start(){
+  busy(true,'جاري فتح اللوحة…');
+  try{
+    const repo=await gh('');
+    if(repo.permissions&&!repo.permissions.push) throw Object.assign(new Error('no push'),{status:403});
+    await loadData();
+    $('#loginView').style.display='none';$('#appView').style.display='block';draw();
+  }catch(e){
+    $('#appView').style.display='none';$('#loginView').style.display='block';
+    if(TOK) $('#loginErr').textContent = e.status===401?'المفتاح غلط أو انتهت صلاحيته. ديرلك مفتاح جديد.' : e.status===404||e.status===403?'المفتاح ما عندهش صلاحية على مستودع moalbera.github.io. تأكد من الخطوة 4 و5.':'صار خطأ: '+e.message;
+    localStorage.removeItem(KEY);TOK='';
+  }finally{busy(false);}
+}
+$('#loginBtn').onclick=()=>{const t=$('#tokIn').value.trim();if(!t){$('#loginErr').textContent='الصق المفتاح الأول.';return;}TOK=t;localStorage.setItem(KEY,t);$('#loginErr').textContent='';start();};
+$('#tokIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('#loginBtn').click();});
+if(TOK) start(); else $('#loginView').style.display='block';
+</script>
+</body>
+</html>

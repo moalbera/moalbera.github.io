@@ -1,0 +1,101 @@
+{
+  "site": {
+    "name": "Mo Albera",
+    "status": "متاح لمشاريع جديدة",
+    "headline": "تصاميم تتكلّم أعلى من الكلام",
+    "intro": "مصمم جرافيك من مصراتة، ليبيا. نساعد العلامات التجارية والفعاليات إنها تحكي قصتها بصرياً — من الشعار والهوية لين آخر بوست.",
+    "ctaWork": "شوف أعمالي",
+    "ctaOrder": "اطلب تصميمك",
+    "workTitle": "الأعمال",
+    "workIntro": "مرتبة حسب نوع التصميم، والأحدث في الأول.",
+    "footerText": "مصراتة، ليبيا",
+    "ghostWord": "Albera"
+  },
+  "contact": {
+    "title": "عندك فكرة؟ خلينا نحكوا",
+    "text": "ابعثلي على واتساب أو الإيميل، واحكيلي على مشروعك — ونرد عليك في أقرب وقت.",
+    "whatsapp": "218945345203",
+    "phoneDisplay": "094-5345203",
+    "email": "mohamedalbera01@gmail.com",
+    "behance": "https://www.behance.net/moalberaDesigner",
+    "instagram": "https://www.instagram.com/mo.albera/",
+    "facebook": "https://www.facebook.com/alberaDesigner"
+  },
+  "featured": {
+    "show": true,
+    "label": "الأحدث",
+    "year": 2026,
+    "tag": "هوية فعالية",
+    "title": "MUN Libya",
+    "subtitle": "من الفكرة إلى أرض الواقع",
+    "text": "هوية بصرية كاملة لنموذج الأمم المتحدة في ليبيا: تصاميم السوشيال ميديا، الرول أب والبانرات، بطاقات أسماء المندوبين وتجهيز القاعة — كل قطعة بنفس اللغة البصرية.",
+    "cover": "work/fb2.jpg",
+    "gallery": [
+      {"img": "work/fb3.jpg", "caption": "التصميم الرقمي للسوشيال ميديا"},
+      {"img": "work/fb4.jpg", "caption": "الرول أب والأعلام"},
+      {"img": "work/fb5.jpg", "caption": "القاعة والتطبيق"},
+      {"img": "work/fb1.jpg", "caption": "بطاقات أسماء المندوبين"}
+    ]
+  },
+  "categories": [
+    {
+      "title": "الهوية البصرية والشعارات",
+      "en": "Branding & Logos",
+      "desc": "شعارات وهويات بصرية لشركات، علامات تجارية وفعاليات.",
+      "items": [
+        {"img": "work/vellano.jpg", "title": "VÉLLANO — هوية علامة نظارات", "year": 2025, "link": "https://www.behance.net/gallery/227008093/VELLANO"},
+        {"img": "work/flash.jpg", "title": "FLASH Media — شعار وكالة إعلانية", "year": 2025, "link": "https://www.behance.net/gallery/228286303/FLASH-Media"},
+        {"img": "work/pixel.jpg", "title": "Pixman — هوية بصرية", "year": 2025, "link": "https://www.behance.net/gallery/228006933/Pixel"},
+        {"img": "work/dusur.jpg", "title": "DUSUR Maritime — هوية بصرية", "year": 2025, "link": "https://www.behance.net/gallery/227292031/DUSUR"},
+        {"img": "work/aif.jpg", "title": "Africa Investment Forum — شعار", "year": 2025, "link": "https://www.behance.net/gallery/227450415/the-Africa-Investment-Forum"},
+        {"img": "work/lawday.jpg", "title": "شعار اليوم العالمي للقانون", "year": 2022, "link": "https://www.behance.net/gallery/156090467/_"},
+        {"img": "work/aburgaya.jpg", "title": "Aburgaya Group — شعار", "year": 2022, "link": "https://www.behance.net/gallery/152807425/Aburgaya-Group"},
+        {"img": "work/kdma.jpg", "title": "خدمة — شعار", "year": 2022, "link": "https://www.behance.net/gallery/153247781/-kdma"},
+        {"img": "work/photographer.jpg", "title": "Ali Maafa — شعار مصوّر", "year": 2022, "link": "https://www.behance.net/gallery/152433205/photographer-logo"},
+        {"img": "work/medx.jpg", "title": "MEDx Misrata — شعار مؤتمر", "year": 2022, "link": "https://www.behance.net/gallery/152317493/MEDx-Misrata"}
+      ]
+    },
+    {
+      "title": "تصاميم السوشيال ميديا",
+      "en": "Social Media",
+      "desc": "بوستات وحملات لصفحات الشركات والمناسبات.",
+      "items": [
+        {"img": "work/services.jpg", "title": "حملة سوشيال ميديا — شركة خدمات عامة", "year": 2022, "link": "https://www.behance.net/gallery/155014901/_"},
+        {"img": "work/captain.jpg", "title": "شارة الكابتن الفلسطينية — كأس العالم", "year": 2022, "link": "https://www.behance.net/gallery/153701071/_"},
+        {"img": "work/itday.jpg", "title": "اليوم الوطني لتقنية المعلومات", "year": 2022, "link": "https://www.behance.net/gallery/153109603/_"}
+      ]
+    },
+    {
+      "title": "تصاميم إبداعية عامة",
+      "en": "Creative & Manipulation",
+      "desc": "أفكار إعلانية ودمج صور (Manipulation) بأسلوب سينمائي.",
+      "items": [
+        {"img": "work/mamaafrica.jpg", "title": "Mama Africa", "year": 2022, "link": "https://www.behance.net/gallery/155299569/mama-africa"},
+        {"img": "work/libya.jpg", "title": "Libya — ليبيا", "year": 2022, "link": "https://www.behance.net/gallery/153482077/Libya"},
+        {"img": "work/pepsi.jpg", "title": "إعلان غير رسمي — Pepsi", "year": 2022, "link": "https://www.behance.net/gallery/153392705/_"},
+        {"img": "work/chess.jpg", "title": "كش ملك — Check Mate", "year": 2022, "link": "https://www.behance.net/gallery/152933617/_"},
+        {"img": "work/merge.jpg", "title": "محاولة دمج — Manipulation", "year": 2022, "link": "https://www.behance.net/gallery/152582883/_"}
+      ]
+    }
+  ],
+  "services": [
+    {"title": "هوية بصرية وشعارات", "text": "شعار، ألوان، خطوط، ودليل استخدام — هوية متكاملة تخلّي علامتك معروفة من أول نظرة."},
+    {"title": "تصاميم سوشيال ميديا", "text": "بوستات، كاروسيل، ستوريز وأغلفة بهوية موحّدة تخلّي صفحتك تبان احترافية."},
+    {"title": "تصاميم إبداعية وإعلانية", "text": "إعلانات بفكرة قوية ودمج صور (Manipulation) تشد الانتباه وتوصّل الرسالة."},
+    {"title": "هوية فعاليات ومؤتمرات", "text": "من البوستر للرول أب، البادجات، الشهادات وتجهيز المكان — كل شي بنفس اللغة."},
+    {"title": "إنفوغرافيك ومحتوى تقني", "text": "تبسيط المعلومات والمواصفات في تصاميم واضحة — للشركات والمعدات والمنتجات."},
+    {"title": "مطبوعات", "text": "منيوهات، فلايرات، بطاقات وملصقات جاهزة للطباعة بجودة عالية."}
+  ],
+  "servicesIntro": "كل مشروع يبدأ بفهم قصتك وجمهورك، وبعدها نحوّلها لتصميم واضح يعلق في الذاكرة.",
+  "steps": [
+    {"title": "نسمعك", "text": "نتكلموا على فكرتك، جمهورك، وشن تبي توصل."},
+    {"title": "الفكرة", "text": "بحث ومودبورد واتجاه بصري واضح قبل أي تصميم."},
+    {"title": "التصميم", "text": "نصمم ونعرض عليك، ونعدّل لين يطلع زي ما تبي."},
+    {"title": "التسليم", "text": "ملفات نهائية جاهزة للسوشيال والطباعة بكل المقاسات."}
+  ],
+  "about": {
+    "text": "أنا [[محمد البيرة]]، مصمم جرافيك وطالب تقنية معلومات من مصراتة. نؤمن إن التصميم الجيد مش بس شكل حلو — هو [[رسالة]] واضحة توصل بسرعة وتعلق في الذاكرة.",
+    "brandsLabel": "مشاريع وعلامات اشتغلت عليها",
+    "brands": ["MUN Libya", "FLASH Media", "Pixman", "DUSUR Maritime", "VÉLLANO", "MEDx Misrata", "Aburgaya Group", "Khdma", "Ali Maafa"]
+  }
+}
