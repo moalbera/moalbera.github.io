@@ -38,6 +38,9 @@ select option{background:#111}
 .it{border-radius:22px;padding:10px;display:flex;flex-direction:column;gap:10px}
 .thumb{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:808/632;background:#111;cursor:pointer}
 .thumb img{width:100%;height:100%;object-fit:cover}
+.thumb.sq{aspect-ratio:1}
+.items.sqi{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+input[type=month]{width:100%;font:inherit;font-size:15px;color:var(--text);background:rgba(0,0,0,.45);border:1px solid var(--stroke-2);border-radius:16px;padding:11px 16px;color-scheme:dark}
 .thumb span{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.55);opacity:0;transition:.25s;font-size:14px}
 .thumb:hover span{opacity:1}
 .it .fields{display:flex;flex-direction:column;gap:8px;padding:0 4px}
@@ -209,64 +212,76 @@ document.addEventListener('input',e=>{const el=e.target;const p=el.dataset.p;if(
   if(el.dataset.lines!==undefined)v=el.value.split('\n').map(s=>s.trim()).filter(Boolean);
   setP(p,v);setDirty(true);});
 const inp=(p,label,o={})=>`<label class="f">${label}<input type="${o.type||'text'}" data-p="${p}" ${o.num?'data-num':''} value="${esc(getP(p))}" ${o.ltr?'dir="ltr"':''} placeholder="${esc(o.ph||'')}"></label>`;
-const ta=(p,label,hint='')=>`<label class="f">${label}<textarea data-p="${p}">${esc(getP(p))}</textarea>${hint?`<span class="hint">${hint}</span>`:''}</label>`;
+const ta=(p,label,hint='')=>`<label class="f">${label}<textarea data-p="${p}" dir="auto" style="${/desc|text|intro/.test(p)?'min-height:170px':''}">${esc(getP(p))}</textarea>${hint?`<span class="hint">${hint}</span>`:''}</label>`;
 
 /* ---------- TABS ---------- */
 const TABS=[['works','الأعمال'],['featured','المشروع المميز'],['texts','النصوص الرئيسية'],['services','الخدمات وطريقة الشغل'],['about','عني'],['contact','التواصل']];
 function drawTabs(){$('#tabs').innerHTML=TABS.map(([k,t])=>`<button class="glass ${k===TAB?'on':''}" data-tab="${k}">${t}</button>`).join('');}
-$('#tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;TAB=b.dataset.tab;draw();scrollTo(0,0);};
+$('#tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;TAB=b.dataset.tab;EDIT=null;draw();scrollTo(0,0);};
 function draw(){drawTabs();$('#view').innerHTML=V[TAB]();}
 
 const V={
 works(){
+  if(EDIT) return V.project();
   const cats=D.categories;
-  return `<div class="bar"><div><h3 style="font-size:26px;font-weight:600">الأعمال</h3><div class="sub" style="margin:0">كل قسم يظهر في الموقع بنفس الترتيب هذا. أول تصميم في القسم يطلع في الأول.</div></div></div>`+
+  return `<div class="bar"><div><h3 style="font-size:26px;font-weight:600">الأعمال</h3><div class="sub" style="margin:0">كل مشروع يظهر في الموقع كمربع، ولما الزائر يضغط عليه تفتحله صفحة المشروع. اضغط ✏️ باش تعدّل تفاصيل أي مشروع.</div></div></div>`+
   cats.map((c,ci)=>`<div class="panel glass">
-    <div class="bar"><h3>${esc(c.title)||'قسم بدون اسم'} <span class="hint">(${c.items.length} تصميم)</span></h3>
+    <div class="bar"><h3>${esc(c.title)||'قسم بدون اسم'} <span class="hint">(${c.projects.length} مشروع)</span></h3>
       <div class="tools">
-        <button class="btn btn-glass sm" data-act="sortYear" data-c="${ci}">رتّب من الأحدث للأقدم</button>
+        <button class="btn btn-glass sm" data-act="sortDate" data-c="${ci}">رتّب من الأحدث للأقدم</button>
         <button class="ib glass" data-act="catUp" data-c="${ci}" title="طلّع القسم لفوق">↑</button>
         <button class="ib glass" data-act="catDown" data-c="${ci}" title="نزّل القسم لتحت">↓</button>
         <button class="ib glass del" data-act="catDel" data-c="${ci}" title="امسح القسم">🗑</button>
       </div></div>
     <div class="row">${inp(`categories.${ci}.title`,'اسم القسم (عربي)')}${inp(`categories.${ci}.en`,'اسم القسم (إنجليزي)',{ltr:1})}${inp(`categories.${ci}.desc`,'وصف قصير')}</div>
-    <div class="items">
-      <button class="add" data-act="addItems" data-c="${ci}">＋ أضف تصميم جديد<br><span class="hint">تقدر تختار أكثر من صورة مع بعض</span></button>
-      ${c.items.map((w,ii)=>`<div class="it glass">
-        <div class="thumb" data-act="replaceImg" data-c="${ci}" data-i="${ii}"><img src="${esc(src(w.img))}" alt="" loading="lazy"><span>بدّل الصورة</span></div>
-        <div class="fields">
-          <input type="text" data-p="categories.${ci}.items.${ii}.title" value="${esc(w.title)}" placeholder="اسم التصميم">
-          <div class="two"><input type="number" data-num data-p="categories.${ci}.items.${ii}.year" value="${esc(w.year)}" placeholder="السنة"><input type="url" dir="ltr" data-p="categories.${ci}.items.${ii}.link" value="${esc(w.link)}" placeholder="رابط Behance (اختياري)"></div>
-          <select data-act="moveCat" data-c="${ci}" data-i="${ii}">${cats.map((x,k)=>`<option value="${k}" ${k===ci?'selected':''}>القسم: ${esc(x.title)}</option>`).join('')}</select>
-        </div>
+    <div class="items sqi">
+      <button class="add" data-act="addProj" data-c="${ci}">＋ أضف مشروع جديد<br><span class="hint">اختار الصورة الرئيسية (الغلاف)</span></button>
+      ${c.projects.map((p,pi)=>`<div class="it glass">
+        <div class="thumb sq" data-act="editProj" data-c="${ci}" data-i="${pi}"><img src="${esc(src(p.cover))}" alt="" loading="lazy"><span>✏️ عدّل المشروع</span></div>
+        <div class="fields"><b style="font-weight:500;font-size:14.5px">${esc(p.title)}</b><span class="hint">${esc(fmtDate(p.date))} · ${(p.gallery||[]).length+1} صور</span></div>
         <div class="tools">
-          <button class="ib glass" data-act="itUp" data-c="${ci}" data-i="${ii}" title="قدّم">→</button>
-          <button class="ib glass" data-act="itDown" data-c="${ci}" data-i="${ii}" title="أخّر">←</button>
-          <button class="ib glass del" data-act="itDel" data-c="${ci}" data-i="${ii}" title="امسح">🗑</button>
+          <button class="ib glass" data-act="editProj" data-c="${ci}" data-i="${pi}" title="عدّل">✏️</button>
+          <button class="ib glass" data-act="pUp" data-c="${ci}" data-i="${pi}" title="قدّم">→</button>
+          <button class="ib glass" data-act="pDown" data-c="${ci}" data-i="${pi}" title="أخّر">←</button>
+          <button class="ib glass del" data-act="pDel" data-c="${ci}" data-i="${pi}" title="امسح">🗑</button>
         </div></div>`).join('')}
     </div></div>`).join('')+
   `<button class="add" style="min-height:120px;width:100%" data-act="addCat">＋ أضف قسم جديد</button>`;
 },
-featured(){
-  const F=D.featured;
-  return `<div class="panel glass"><h3>المشروع المميز</h3><div class="sub">المشروع الكبير اللي يظهر في أول قسم الأعمال.</div>
-    <label class="check" style="margin-bottom:18px"><input type="checkbox" data-p="featured.show" ${F.show?'checked':''}> اعرض المشروع المميز في الموقع</label>
-    <div class="row">${inp('featured.title','اسم المشروع')}${inp('featured.subtitle','العنوان الفرعي')}</div>
-    <div class="row">${inp('featured.label','الشارة البيضاء (مثلاً: الأحدث)')}${inp('featured.year','السنة',{type:'number',num:1})}${inp('featured.tag','نوع المشروع')}</div>
-    ${ta('featured.text','وصف المشروع')}
+project(){
+  const {ci,pi}=EDIT, c=D.categories[ci], p=c.projects[pi], base=`categories.${ci}.projects.${pi}`;
+  return `<div class="bar"><button class="btn btn-glass sm" data-act="backList">→ ارجع لكل الأعمال</button>
+    <div class="tools"><a class="btn btn-glass sm" href="../project.html?id=${encodeURIComponent(p.id)}" target="_blank" rel="noopener">شوف صفحة المشروع</a>
+    <button class="btn btn-glass sm" data-act="pDel" data-c="${ci}" data-i="${pi}" style="color:#ff8b8b">امسح المشروع</button></div></div>
+  <div class="panel glass"><h3>تفاصيل المشروع</h3><div class="sub">الكلام هذا يظهر في صفحة المشروع.</div>
+    <div class="row">${inp(base+'.title','اسم المشروع')}${inp(base+'.subtitle','عنوان فرعي (اختياري)')}</div>
+    <div class="row">
+      <label class="f">تاريخ التنفيذ<input type="month" data-p="${base}.date" value="${esc(p.date)}" dir="ltr"></label>
+      ${inp(base+'.client','العميل (اختياري)')}
+      <label class="f">القسم<select data-act="moveProj">${D.categories.map((x,k)=>`<option value="${k}" ${k===ci?'selected':''}>${esc(x.title)}</option>`).join('')}</select></label>
+    </div>
+    ${ta(base+'.desc','وصف المشروع (الفكرة، الهدف، شنو درت فيه)')}
+    <div style="height:14px"></div>${inp(base+'.link','رابط خارجي، مثلاً Behance (اختياري)',{ltr:1})}
   </div>
-  <div class="panel glass"><h3>الصورة الرئيسية</h3><div class="sub">اضغط على الصورة باش تبدّلها.</div>
-    <div style="max-width:520px"><div class="thumb" data-act="featCover" style="aspect-ratio:auto"><img src="${esc(src(F.cover))}" alt=""><span>بدّل الصورة</span></div></div>
+  <div class="panel glass"><h3>الصورة الرئيسية (الغلاف)</h3><div class="sub">تظهر كمربع في الصفحة الرئيسية، وكصورة كبيرة في أول صفحة المشروع. اضغط عليها باش تبدّلها.</div>
+    <div style="max-width:420px"><div class="thumb" data-act="pCover" style="aspect-ratio:auto"><img src="${esc(src(p.cover))}" alt=""><span>بدّل الغلاف</span></div></div>
   </div>
-  <div class="panel glass"><h3>صور المشروع</h3><div class="sub">الصور الصغيرة اللي تحت الصورة الرئيسية.</div>
+  <div class="panel glass"><h3>صور المشروع</h3><div class="sub">تظهر تحت الوصف بالترتيب هذا. تقدر تختار أكثر من صورة مع بعض.</div>
     <div class="items">
-      <button class="add" data-act="featAdd">＋ أضف صور</button>
-      ${(F.gallery||[]).map((g,i)=>`<div class="it glass">
-        <div class="thumb" data-act="featReplace" data-i="${i}"><img src="${esc(src(g.img))}" alt=""><span>بدّل الصورة</span></div>
-        <div class="fields"><input type="text" data-p="featured.gallery.${i}.caption" value="${esc(g.caption)}" placeholder="وصف الصورة"></div>
-        <div class="tools"><button class="ib glass" data-act="gUp" data-i="${i}">→</button><button class="ib glass" data-act="gDown" data-i="${i}">←</button><button class="ib glass del" data-act="gDel" data-i="${i}">🗑</button></div>
+      <button class="add" data-act="gAdd">＋ أضف صور</button>
+      ${(p.gallery||[]).map((g,i)=>`<div class="it glass">
+        <div class="thumb" data-act="gReplace" data-i="${i}"><img src="${esc(src(g))}" alt="" loading="lazy"><span>بدّل الصورة</span></div>
+        <div class="tools"><span class="hint" style="margin-inline-end:auto;align-self:center">صورة ${i+1}</span><button class="ib glass" data-act="gUp" data-i="${i}">→</button><button class="ib glass" data-act="gDown" data-i="${i}">←</button><button class="ib glass del" data-act="gDel" data-i="${i}">🗑</button></div>
       </div>`).join('')}
     </div></div>`;
+},
+featured(){
+  const F=D.featured, all=[];D.categories.forEach(c=>c.projects.forEach(p=>all.push(p)));
+  return `<div class="panel glass"><h3>المشروع المميز</h3><div class="sub">المشروع الكبير اللي يظهر في أول قسم الأعمال. اختاره من مشاريعك، وصوره ونصوصه تجي من صفحة المشروع نفسه.</div>
+    <label class="check" style="margin-bottom:18px"><input type="checkbox" data-p="featured.show" ${F.show?'checked':''}> اعرض المشروع المميز في الموقع</label>
+    <label class="f" style="margin-bottom:14px">المشروع<select data-p="featured.projectId">${all.map(p=>`<option value="${esc(p.id)}" ${p.id===F.projectId?'selected':''}>${esc(p.title)} — ${esc(fmtDate(p.date))}</option>`).join('')}</select></label>
+    <div class="row">${inp('featured.label','الشارة البيضاء (مثلاً: الأحدث)')}${inp('featured.tag','نوع المشروع')}</div>
+  </div>`;
 },
 texts(){
   return `<div class="panel glass"><h3>أول الصفحة</h3><div class="sub">الكلام اللي يشوفه الزائر أول ما يفتح الموقع.</div>
@@ -306,27 +321,34 @@ contact(){
 }};
 
 /* ---------- ACTIONS ---------- */
-document.addEventListener('change',e=>{const el=e.target;if(el.dataset.act!=='moveCat')return;
-  const ci=+el.dataset.c,ii=+el.dataset.i,to=+el.value;const [w]=D.categories[ci].items.splice(ii,1);D.categories[to].items.unshift(w);setDirty(true);draw();toast('التصميم تنقل لأول القسم الجديد');});
+let EDIT=null;
+const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+function fmtDate(d){const [y,m]=String(d||'').split('-');return m?MONTHS[+m-1]+' '+y:(y||'بدون تاريخ');}
+function newId(){const ids=new Set();D.categories.forEach(c=>c.projects.forEach(p=>ids.add(p.id)));let id;do{id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);}while(ids.has(id));return id;}
+const thisMonth=()=>new Date().toISOString().slice(0,7);
+document.addEventListener('change',e=>{const el=e.target;if(el.dataset.act!=='moveProj')return;
+  const {ci,pi}=EDIT,to=+el.value;if(to===ci)return;const [p]=D.categories[ci].projects.splice(pi,1);D.categories[to].projects.unshift(p);EDIT={ci:to,pi:0};setDirty(true);draw();toast('المشروع تنقل لأول قسم "'+D.categories[to].title+'"');});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='SELECT')return;
-  const a=b.dataset.act,ci=+b.dataset.c,ii=+b.dataset.i,C=D.categories[ci],F=D.featured;
+  const a=b.dataset.act,ci=+b.dataset.c,ii=+b.dataset.i,C=D.categories[ci];
+  const P=EDIT?D.categories[EDIT.ci].projects[EDIT.pi]:null;
   switch(a){
-    case 'addItems': withUpload(true,ps=>C.items.unshift(...ps.map(p=>({img:p,title:'تصميم جديد',year:new Date().getFullYear(),link:''}))));break;
-    case 'replaceImg': withUpload(false,ps=>C.items[ii].img=ps[0]);break;
-    case 'itUp': move(C.items,ii,-1);break;
-    case 'itDown': move(C.items,ii,1);break;
-    case 'itDel': if(confirm('متأكد تبي تمسح "'+C.items[ii].title+'"؟')){C.items.splice(ii,1);setDirty(true);draw();}break;
-    case 'sortYear': C.items.sort((x,y)=>(+y.year||0)-(+x.year||0));setDirty(true);draw();toast('ترتّب من الأحدث للأقدم');break;
+    case 'addProj': withUpload(false,ps=>{C.projects.unshift({id:newId(),title:'مشروع جديد',subtitle:'',date:thisMonth(),client:'',cover:ps[0],desc:'',gallery:[],link:''});EDIT={ci,pi:0};});break;
+    case 'editProj': EDIT={ci,pi:ii};draw();scrollTo(0,0);break;
+    case 'backList': EDIT=null;draw();scrollTo(0,0);break;
+    case 'pUp': move(C.projects,ii,-1);break;
+    case 'pDown': move(C.projects,ii,1);break;
+    case 'pDel': if(confirm('متأكد تبي تمسح مشروع "'+C.projects[ii].title+'"؟')){C.projects.splice(ii,1);EDIT=null;setDirty(true);draw();}break;
+    case 'sortDate': C.projects.sort((x,y)=>String(y.date||'').localeCompare(String(x.date||'')));setDirty(true);draw();toast('ترتّب من الأحدث للأقدم');break;
     case 'catUp': move(D.categories,ci,-1);break;
     case 'catDown': move(D.categories,ci,1);break;
-    case 'catDel': if(confirm(C.items.length?`القسم فيه ${C.items.length} تصميم، كلهم حيتمسحوا. متأكد؟`:'متأكد تبي تمسح القسم؟')){D.categories.splice(ci,1);setDirty(true);draw();}break;
-    case 'addCat': D.categories.push({title:'قسم جديد',en:'',desc:'',items:[]});setDirty(true);draw();scrollTo(0,document.body.scrollHeight);break;
-    case 'featCover': withUpload(false,ps=>F.cover=ps[0]);break;
-    case 'featAdd': withUpload(true,ps=>{F.gallery=F.gallery||[];F.gallery.push(...ps.map(p=>({img:p,caption:''})));});break;
-    case 'featReplace': withUpload(false,ps=>F.gallery[ii].img=ps[0]);break;
-    case 'gUp': move(F.gallery,ii,-1);break;
-    case 'gDown': move(F.gallery,ii,1);break;
-    case 'gDel': if(confirm('تمسح الصورة هذي؟')){F.gallery.splice(ii,1);setDirty(true);draw();}break;
+    case 'catDel': if(confirm(C.projects.length?`القسم فيه ${C.projects.length} مشروع، كلهم حيتمسحوا. متأكد؟`:'متأكد تبي تمسح القسم؟')){D.categories.splice(ci,1);setDirty(true);draw();}break;
+    case 'addCat': D.categories.push({title:'قسم جديد',en:'',desc:'',projects:[]});setDirty(true);draw();scrollTo(0,document.body.scrollHeight);break;
+    case 'pCover': withUpload(false,ps=>P.cover=ps[0]);break;
+    case 'gAdd': withUpload(true,ps=>{P.gallery=P.gallery||[];P.gallery.push(...ps);});break;
+    case 'gReplace': withUpload(false,ps=>P.gallery[ii]=ps[0]);break;
+    case 'gUp': move(P.gallery,ii,-1);break;
+    case 'gDown': move(P.gallery,ii,1);break;
+    case 'gDel': if(confirm('تمسح الصورة هذي؟')){P.gallery.splice(ii,1);setDirty(true);draw();}break;
     case 'lUp': move(D[b.dataset.k],ii,-1);break;
     case 'lDown': move(D[b.dataset.k],ii,1);break;
     case 'lDel': if(confirm('متأكد؟')){D[b.dataset.k].splice(ii,1);setDirty(true);draw();}break;

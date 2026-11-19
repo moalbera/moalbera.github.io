@@ -123,7 +123,7 @@
       <h2 data-t="contact.title"></h2>
       <p data-t="contact.text"></p>
       <div class="cta-row">
-        <a class="btn btn-glass" id="mailBtn"><span class="ltr" data-t="contact.email"></span></a>
+        <a class="btn btn-glass mail-link"><span class="ltr" data-t="contact.email"></span></a>
         <a target="_blank" rel="noopener" class="btn btn-white wa-link">واتساب <span class="ltr" data-t="contact.phoneDisplay"></span></a>
       </div>
     </div>
@@ -134,7 +134,7 @@
   <div class="foot-line">
     <span>© <span id="yr"></span> <span data-t="site.name"></span></span><i></i>
     <span data-t="site.footerText"></span><i></i>
-    <a id="footBe" target="_blank" rel="noopener">Behance</a>
+    <a class="be-link" target="_blank" rel="noopener">Behance</a>
   </div>
   <div class="ghost" aria-hidden="true" data-t="site.ghostWord"></div>
 </footer>
@@ -142,72 +142,41 @@
 
 <a class="wa glass wa-link" target="_blank" rel="noopener" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
 
-<div class="lb" id="lb">
-  <button class="x glass" aria-label="إغلاق">✕</button>
-  <button class="prev glass" aria-label="السابق">›</button>
-  <button class="next glass" aria-label="التالي">‹</button>
-  <img id="lbImg" alt="">
-  <div class="lb-cap" id="lbCap"></div>
-</div>
-
+<script src="app.js"></script>
 <script>
-const ICONS={
- behance:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.2 11.3c.8-.4 1.3-1.1 1.3-2.1C9.5 7.1 7.9 6.5 6 6.5H1v11h5.2c2 0 3.8-.9 3.8-3.1 0-1.4-.7-2.5-1.8-3.1zM3.3 8.4h2.2c.8 0 1.6.2 1.6 1.2 0 .9-.6 1.2-1.4 1.2H3.3V8.4zm2.5 7.2H3.3v-3h2.6c1 0 1.7.4 1.7 1.5s-.8 1.5-1.8 1.5zM15.4 9.2c-2.5 0-4.1 1.8-4.1 4.2 0 2.5 1.5 4.2 4.1 4.2 1.9 0 3.2-.9 3.8-2.8h-2c-.2.7-1.1 1-1.7 1-1.3 0-2-.7-2-2h5.8c.1-2.6-1.3-4.6-3.9-4.6zm-1.9 3.4c.1-1.1.8-1.7 1.8-1.7 1.1 0 1.6.6 1.7 1.7h-3.5zM13.6 6.9h4.5v1.3h-4.5z"/></svg>',
- facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v1.9H8v3.2h2.6V22H14v-10.3h2.7l.4-3.2H14z"/></svg>',
- instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>'
-};
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const get=(o,p)=>p.split('.').reduce((a,k)=>a?.[k],o);
-let ALL=[];
-
 function render(D){
-  document.querySelectorAll('[data-t]').forEach(el=>{
-    const k=el.dataset.t; el.textContent = k==='initial' ? (D.site.name||'M').trim()[0] : (get(D,k)??'');
-  });
+  fillCommon(D);
   document.title=D.site.name+' — مصمم جرافيك';
-  const C=D.contact;
-  document.querySelectorAll('.wa-link').forEach(a=>a.href='https://wa.me/'+String(C.whatsapp).replace(/\D/g,''));
-  document.getElementById('mailBtn').href='mailto:'+C.email;
-  document.getElementById('footBe').href=C.behance||'#';
-  document.getElementById('socials').innerHTML=['behance','facebook','instagram'].filter(k=>C[k]).map(k=>
-    `<a class="icon-btn glass" href="${esc(C[k])}" target="_blank" rel="noopener" aria-label="${k}">${ICONS[k]}</a>`).join('');
-
-  // featured
-  const F=D.featured, fb=document.getElementById('featuredBox');
-  const cats=(D.categories||[]).filter(c=>c.items&&c.items.length);
+  const cats=(D.categories||[]).filter(c=>c.projects&&c.projects.length);
+  const all=allProjects(D);
   let nav='';
-  if(F&&F.show){
-    nav+=`<a class="glass" href="#featured">مشروع مميز<b>${esc(F.year)}</b></a>`;
-    const fl=[{img:F.cover,cap:F.title+' — '+F.subtitle+' · '+F.year},...(F.gallery||[]).map(g=>({img:g.img,cap:F.title+' — '+g.caption}))];
-    fb.innerHTML=`<div class="feature glass rv" id="featured">
+
+  // المشروع المميز
+  const F=D.featured||{}, fp=all.find(p=>p.id===F.projectId), fb=document.getElementById('featuredBox');
+  if(F.show&&fp){
+    nav+=`<a class="glass" href="#featured">مشروع مميز<b>${esc(yearOf(fp.date))}</b></a>`;
+    const g=(fp.gallery||[]).slice(0,4);
+    fb.innerHTML=`<a class="feature glass rv" id="featured" href="${projUrl(fp)}">
       <div class="feature-top">
-        <div class="feature-img" data-f="0"><img src="${esc(F.cover)}" alt="${esc(F.title)}" loading="lazy"></div>
+        <div class="feature-img"><img src="${esc(fp.cover)}" alt="${esc(fp.title)}" loading="lazy"></div>
         <div class="feature-txt">
-          <div class="meta">${F.label?`<span class="tag hot">${esc(F.label)} · ${esc(F.year)}</span>`:''}${F.tag?`<span class="tag">${esc(F.tag)}</span>`:''}</div>
-          <h3><span class="ltr">${esc(F.title)}</span><br>${esc(F.subtitle)}</h3>
-          <p>${esc(F.text)}</p>
+          <div class="meta">${F.label?`<span class="tag hot">${esc(F.label)} · ${esc(yearOf(fp.date))}</span>`:''}${F.tag?`<span class="tag">${esc(F.tag)}</span>`:''}</div>
+          <h3><span class="ltr">${esc(fp.title)}</span>${fp.subtitle?`<br>${esc(fp.subtitle)}`:''}</h3>
+          <p>${esc((fp.desc||'').split('\n')[0])}</p>
+          <span class="btn btn-white" style="margin-top:24px">شوف المشروع كامل</span>
         </div>
       </div>
-      ${(F.gallery||[]).length?`<div class="feature-grid">${F.gallery.map((g,i)=>`<div data-f="${i+1}"><img src="${esc(g.img)}" alt="${esc(g.caption)}" loading="lazy"></div>`).join('')}</div>`:''}
-    </div>`;
-    fb.querySelectorAll('[data-f]').forEach(el=>el.onclick=()=>open(fl.map(x=>({img:x.img,t:x.cap})),+el.dataset.f));
+      ${g.length?`<div class="feature-grid">${g.map(x=>`<div><img src="${esc(x)}" alt="" loading="lazy"></div>`).join('')}</div>`:''}
+    </a>`;
   } else fb.innerHTML='';
 
-  // categories
-  ALL=[];
+  // الأقسام: مربعات، كل مربع يفتح صفحة المشروع
   document.getElementById('cats').innerHTML=cats.map((c,ci)=>{
-    nav+=`<a class="glass" href="#cat${ci}">${esc(c.title)}<b>${c.items.length}</b></a>`;
-    const years=new Set(c.items.map(x=>x.year)).size; let last=null;
-    const cards=c.items.map(w=>{
-      const i=ALL.push({img:w.img,t:w.title+(w.year?' · '+w.year:''),l:w.link,c:ci})-1;
-      const div=(years>1&&w.year!==last)?`<div class="yr-divider">${esc(w.year)}</div>`:''; last=w.year;
-      return div+`<article class="card glass rv" data-i="${i}">
-        <div class="ph"><img src="${esc(w.img)}" alt="${esc(w.title)}" loading="lazy"></div>
-        <div class="cap"><h4>${esc(w.title)}</h4>${w.year?`<span class="yr">${esc(w.year)}</span>`:''}</div></article>`;}).join('');
+    nav+=`<a class="glass" href="#cat${ci}">${esc(c.title)}<b>${c.projects.length}</b></a>`;
     const n=String(ci+1).padStart(2,'0'), tot=String(cats.length).padStart(2,'0');
     return `<div class="cat" id="cat${ci}">
       <div class="cat-head rv"><div><span class="num ltr">${n} / ${tot}</span><h3>${esc(c.title)}${c.en?`<small class="ltr">${esc(c.en)}</small>`:''}</h3></div><p>${esc(c.desc)}</p></div>
-      <div class="grid">${cards}</div></div>`;
+      <div class="grid sq">${c.projects.map(p=>projectCard({...p})).join('')}</div></div>`;
   }).join('');
   document.getElementById('catNav').innerHTML=nav;
 
@@ -218,32 +187,8 @@ function render(D){
   document.getElementById('aboutText').innerHTML=esc(D.about.text).replace(/\[\[(.+?)\]\]/g,'<em>$1</em>');
   document.getElementById('brands').innerHTML=(D.about.brands||[]).map(b=>`<span>${esc(b)}</span>`).join('');
 }
-
-// lightbox
-let list=[],idx=0;
-const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
-function show(){const x=list[idx];lbImg.src=x.img;lbCap.innerHTML=esc(x.t)+(x.l?`<a href="${esc(x.l)}" target="_blank" rel="noopener">شوف المشروع كامل</a>`:'');}
-function open(l,i){list=l;idx=i;show();lb.classList.add('open');document.body.style.overflow='hidden';}
-function close(){lb.classList.remove('open');document.body.style.overflow='';}
-document.getElementById('cats').addEventListener('click',e=>{const it=e.target.closest('.card');if(!it)return;
-  const me=ALL[it.dataset.i]; const same=ALL.filter(a=>a.c===me.c); open(same,same.indexOf(me));});
-lb.querySelector('.x').onclick=close;
-lb.querySelector('.next').onclick=e=>{e.stopPropagation();idx=(idx+1)%list.length;show();};
-lb.querySelector('.prev').onclick=e=>{e.stopPropagation();idx=(idx-1+list.length)%list.length;show();};
-lb.addEventListener('click',e=>{if(e.target===lb)close();});
-addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
-  if(e.key==='Escape')close();
-  if(e.key==='ArrowLeft')lb.querySelector('.next').click();
-  if(e.key==='ArrowRight')lb.querySelector('.prev').click();});
-
-document.querySelectorAll('.links a').forEach(a=>a.onclick=()=>document.getElementById('nav').classList.remove('open'));
-document.getElementById('yr').textContent=new Date().getFullYear();
-
-fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(D=>{
-  render(D);
-  document.body.classList.remove('loading');
-  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.1});
-  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+loadData().then(D=>{
+  render(D); document.body.classList.remove('loading'); reveal();
   if(location.hash){const t=document.querySelector(location.hash); t&&t.scrollIntoView();}
 }).catch(()=>{document.body.classList.remove('loading');document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'));});
 </script>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مشروع — Mo Albera</title>
+<meta property="og:image" content="https://moalbera.github.io/work/fb2.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>body.loading main{opacity:0}main{transition:opacity .5s}</style>
+</head>
+<body class="loading">
+
+<div class="bg" aria-hidden="true">
+  <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <filter id="b1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+      <filter id="b2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="b3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+      <linearGradient id="go" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff7a1a" stop-opacity="0"/><stop offset=".5" stop-color="#ff8a2a"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></linearGradient>
+      <linearGradient id="gs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fb3d9" stop-opacity="0"/><stop offset=".5" stop-color="#c9d6ee"/><stop offset="1" stop-color="#5b6c8e" stop-opacity="0"/></linearGradient>
+    </defs>
+    <g class="spin2"><ellipse cx="500" cy="500" rx="330" ry="150" fill="#1b2235" filter="url(#b3)" opacity=".9" transform="rotate(-18 500 500)"/></g>
+    <g class="spin">
+      <path d="M170 560 C 300 380, 520 330, 700 420 S 880 600, 760 640" fill="none" stroke="url(#gs)" stroke-width="70" filter="url(#b1)" opacity=".55"/>
+      <path d="M220 600 C 360 430, 560 380, 720 450 S 860 590, 800 620" fill="none" stroke="url(#go)" stroke-width="10" filter="url(#b2)" opacity=".95"/>
+      <path d="M260 470 C 420 360, 600 360, 760 480" fill="none" stroke="url(#go)" stroke-width="26" filter="url(#b1)" opacity=".7"/>
+      <path d="M380 380 C 470 330, 560 330, 640 370" fill="none" stroke="url(#gs)" stroke-width="40" filter="url(#b1)" opacity=".6"/>
+    </g>
+  </svg>
+</div>
+<div class="noise" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="nav-in glass">
+    <a href="./" class="logo"><i data-t="initial">M</i><span data-t="site.name">Mo Albera</span></a>
+    <div class="links">
+      <a href="./#work">الأعمال</a>
+      <a href="./#services">الخدمات</a>
+      <a href="./#about">عني</a>
+      <a href="./#contact">تواصل</a>
+    </div>
+    <a class="btn btn-white nav-cta wa-link" target="_blank" rel="noopener" data-t="site.ctaOrder"></a>
+    <button class="menu-btn" aria-label="القائمة" onclick="document.getElementById('nav').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap" id="pj"></div>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="hero-card glass rv">
+        <span class="pill glass" style="margin-bottom:24px"><span class="dot"></span>Let's work together</span>
+        <h2>عجبك المشروع؟ خلينا نديرولك واحد</h2>
+        <p data-t="contact.text"></p>
+        <div class="cta-row">
+          <a class="btn btn-glass" href="./#work">شوف باقي الأعمال</a>
+          <a target="_blank" rel="noopener" class="btn btn-white wa-link">واتساب <span class="ltr" data-t="contact.phoneDisplay"></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-line">
+      <span>© <span id="yr"></span> <span data-t="site.name"></span></span><i></i>
+      <span data-t="site.footerText"></span><i></i>
+      <a class="be-link" target="_blank" rel="noopener">Behance</a>
+    </div>
+    <div class="ghost" aria-hidden="true" data-t="site.ghostWord"></div>
+  </footer>
+</main>
+
+<a class="wa glass wa-link" target="_blank" rel="noopener" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
+
+<script src="app.js"></script>
+<script>
+const id=new URLSearchParams(location.search).get('id');
+loadData().then(D=>{
+  fillCommon(D);
+  const all=allProjects(D), p=all.find(x=>x.id===id), box=document.getElementById('pj');
+  if(!p){
+    box.innerHTML=`<div class="pj-head"><h1>المشروع مش موجود</h1><p class="sub">يمكن تمسح أو تبدّل رابطه.</p><div style="margin-top:30px"><a class="btn btn-white" href="./#work">ارجع للأعمال</a></div></div>`;
+  } else {
+    document.title=p.title+' — '+D.site.name;
+    const sib=p.cat.projects, i=sib.findIndex(x=>x.id===p.id);
+    const prev=sib[i-1], next=sib[i+1];
+    const imgs=[p.cover,...(p.gallery||[])];
+    box.innerHTML=`
+    <header class="pj-head">
+      <a class="back glass" href="./#cat${p.ci}">→ ${esc(p.cat.title)}</a>
+      <h1 class="rv">${esc(p.title)}</h1>
+      ${p.subtitle?`<p class="sub rv">${esc(p.subtitle)}</p>`:''}
+      <div class="pj-meta rv">
+        ${p.date?`<div class="glass"><small>تاريخ التنفيذ</small><b>${esc(fmtDate(p.date))}</b></div>`:''}
+        <div class="glass"><small>نوع المشروع</small><b>${esc(p.cat.title)}</b></div>
+        ${p.client?`<div class="glass"><small>العميل</small><b>${esc(p.client)}</b></div>`:''}
+        <div class="glass"><small>عدد الصور</small><b class="ltr">${imgs.length}</b></div>
+      </div>
+    </header>
+    <div class="pj-cover glass rv"><img src="${esc(p.cover)}" alt="${esc(p.title)}" data-i="0"></div>
+    ${p.desc?`<div class="pj-desc glass rv"><h2>عن المشروع</h2><p dir="auto">${esc(p.desc)}</p></div>`:''}
+    <div class="pj-gal">${(p.gallery||[]).map((g,k)=>`<figure class="glass rv"><img src="${esc(g)}" alt="${esc(p.title)} ${k+2}" loading="lazy" data-i="${k+1}"></figure>`).join('')}</div>
+    ${p.link?`<div style="text-align:center;margin-top:34px"><a class="btn btn-glass" href="${esc(p.link)}" target="_blank" rel="noopener">شوف المشروع على ${/behance/.test(p.link)?'Behance':'الصفحة الأصلية'}</a></div>`:''}
+    ${(prev||next)?`<div class="pj-nav">
+      ${prev?`<a class="glass" href="${projUrl(prev)}"><img src="${esc(prev.cover)}" alt=""><div><small>→ المشروع اللي قبله</small><b>${esc(prev.title)}</b></div></a>`:'<span></span>'}
+      ${next?`<a class="glass nx" href="${projUrl(next)}"><img src="${esc(next.cover)}" alt=""><div><small>المشروع اللي بعده ←</small><b>${esc(next.title)}</b></div></a>`:''}
+    </div>`:''}`;
+    box.querySelectorAll('img[data-i]').forEach(im=>im.onclick=()=>LB.open(imgs.map((x,k)=>({img:x,t:p.title+' — '+(k+1)+' / '+imgs.length})),+im.dataset.i));
+  }
+  document.body.classList.remove('loading'); reveal();
+}).catch(()=>{document.body.classList.remove('loading');});
+</script>
+</body>
+</html>

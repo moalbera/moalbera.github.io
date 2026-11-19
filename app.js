@@ -1,0 +1,61 @@
+// أدوات مشتركة بين الصفحة الرئيسية وصفحة المشروع
+const ICONS={
+ behance:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.2 11.3c.8-.4 1.3-1.1 1.3-2.1C9.5 7.1 7.9 6.5 6 6.5H1v11h5.2c2 0 3.8-.9 3.8-3.1 0-1.4-.7-2.5-1.8-3.1zM3.3 8.4h2.2c.8 0 1.6.2 1.6 1.2 0 .9-.6 1.2-1.4 1.2H3.3V8.4zm2.5 7.2H3.3v-3h2.6c1 0 1.7.4 1.7 1.5s-.8 1.5-1.8 1.5zM15.4 9.2c-2.5 0-4.1 1.8-4.1 4.2 0 2.5 1.5 4.2 4.1 4.2 1.9 0 3.2-.9 3.8-2.8h-2c-.2.7-1.1 1-1.7 1-1.3 0-2-.7-2-2h5.8c.1-2.6-1.3-4.6-3.9-4.6zm-1.9 3.4c.1-1.1.8-1.7 1.8-1.7 1.1 0 1.6.6 1.7 1.7h-3.5zM13.6 6.9h4.5v1.3h-4.5z"/></svg>',
+ facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v1.9H8v3.2h2.6V22H14v-10.3h2.7l.4-3.2H14z"/></svg>',
+ instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>'
+};
+const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const get=(o,p)=>p.split('.').reduce((a,k)=>a?.[k],o);
+const yearOf=d=>String(d||'').slice(0,4);
+function fmtDate(d){const [y,m]=String(d||'').split('-');return m?MONTHS[+m-1]+' '+y:(y||'');}
+const waLink=C=>'https://wa.me/'+String(C.whatsapp||'').replace(/\D/g,'');
+const projUrl=p=>'project.html?id='+encodeURIComponent(p.id);
+
+function allProjects(D){const out=[];(D.categories||[]).forEach((c,ci)=>(c.projects||[]).forEach(p=>out.push({...p,ci,cat:c})));return out;}
+
+function fillCommon(D){
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const k=el.dataset.t; el.textContent = k==='initial' ? (D.site.name||'M').trim()[0] : (get(D,k)??'');
+  });
+  const C=D.contact;
+  document.querySelectorAll('.wa-link').forEach(a=>a.href=waLink(C));
+  document.querySelectorAll('.mail-link').forEach(a=>a.href='mailto:'+C.email);
+  document.querySelectorAll('.be-link').forEach(a=>a.href=C.behance||'#');
+  const s=document.getElementById('socials');
+  if(s) s.innerHTML=['behance','facebook','instagram'].filter(k=>C[k]).map(k=>
+    `<a class="icon-btn glass" href="${esc(C[k])}" target="_blank" rel="noopener" aria-label="${k}">${ICONS[k]}</a>`).join('');
+  const yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
+  document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));
+}
+
+function projectCard(p){
+  return `<a class="pcard glass rv" href="${projUrl(p)}">
+    <div class="ph"><img src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy">
+      <div class="ov"><span>شوف المشروع ←</span><span class="cnt">${(p.gallery||[]).length+1} صور</span></div></div>
+    <div class="cap"><h4>${esc(p.title)}</h4>${p.date?`<span class="yr">${esc(yearOf(p.date))}</span>`:''}</div></a>`;
+}
+
+function reveal(){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.08});
+  document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
+}
+
+// lightbox
+const LB=(()=>{
+  const el=document.createElement('div');el.className='lb';
+  el.innerHTML='<button class="x glass" aria-label="إغلاق">✕</button><button class="prev glass" aria-label="السابق">›</button><button class="next glass" aria-label="التالي">‹</button><img alt=""><div class="lb-cap"></div>';
+  let list=[],idx=0;const img=el.querySelector('img'),cap=el.querySelector('.lb-cap');
+  const show=()=>{const x=list[idx];img.src=x.img;cap.textContent=x.t||'';};
+  const close=()=>{el.classList.remove('open');document.body.style.overflow='';};
+  const step=d=>{idx=(idx+d+list.length)%list.length;show();};
+  el.querySelector('.x').onclick=close;
+  el.querySelector('.next').onclick=e=>{e.stopPropagation();step(1);};
+  el.querySelector('.prev').onclick=e=>{e.stopPropagation();step(-1);};
+  el.addEventListener('click',e=>{if(e.target===el)close();});
+  addEventListener('keydown',e=>{if(!el.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')step(1);if(e.key==='ArrowRight')step(-1);});
+  document.addEventListener('DOMContentLoaded',()=>document.body.appendChild(el));
+  return {open(l,i){list=l;idx=i;show();el.classList.add('open');document.body.style.overflow='hidden';}};
+})();
+
+function loadData(){return fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json());}

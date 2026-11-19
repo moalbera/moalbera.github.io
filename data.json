@@ -23,96 +23,223 @@
   },
   "featured": {
     "show": true,
+    "projectId": "mun-libya",
     "label": "الأحدث",
-    "year": 2026,
-    "tag": "هوية فعالية",
-    "title": "MUN Libya",
-    "subtitle": "من الفكرة إلى أرض الواقع",
-    "text": "هوية بصرية كاملة لنموذج الأمم المتحدة في ليبيا: تصاميم السوشيال ميديا، الرول أب والبانرات، بطاقات أسماء المندوبين وتجهيز القاعة — كل قطعة بنفس اللغة البصرية.",
-    "cover": "work/fb2.jpg",
-    "gallery": [
-      {
-        "img": "work/fb3.jpg",
-        "caption": "التصميم الرقمي للسوشيال ميديا"
-      },
-      {
-        "img": "work/fb4.jpg",
-        "caption": "الرول أب والأعلام"
-      },
-      {
-        "img": "work/fb5.jpg",
-        "caption": "القاعة والتطبيق"
-      },
-      {
-        "img": "work/fb1.jpg",
-        "caption": "بطاقات أسماء المندوبين"
-      }
-    ]
+    "tag": "هوية فعالية"
   },
   "categories": [
     {
       "title": "الهوية البصرية والشعارات",
       "en": "Branding & Logos",
-      "desc": "شعارات وهويات بصرية لشركات، علامات تجارية وفعاليات.",
-      "items": [
+      "desc": "شعارات وهويات بصرية لشركات وعلامات تجارية.",
+      "projects": [
         {
-          "img": "work/vellano.jpg",
-          "title": "VÉLLANO — هوية علامة نظارات",
-          "year": 2025,
+          "id": "ahd-yatajadad",
+          "title": "عهد يتجدّد",
+          "subtitle": "شعار المؤتمر الكشفي العام العشرون",
+          "date": "2026-11",
+          "client": "",
+          "cover": "work/1795095085902-6sq9j.jpg",
+          "desc": "",
+          "gallery": [
+            "work/1795095089473-2uhen.jpg",
+            "work/1795095092288-vux1z.jpg",
+            "work/1795095096219-lz0ll.jpg",
+            "work/1795095098651-9lxsj.jpg",
+            "work/1795095101332-amko9.jpg"
+          ],
           "link": ""
         },
         {
-          "img": "work/flash.jpg",
-          "title": "FLASH Media — شعار وكالة إعلانية",
-          "year": 2025,
+          "id": "flash",
+          "title": "FLASH Media",
+          "subtitle": "",
+          "date": "2025-06",
+          "client": "",
+          "cover": "work/flash.jpg",
+          "desc": "يسرني أن أشارككم أحد أعمالي الأخيرة في تصميم الشعارات، حيث قمت بتصميم شعار لشركة Flash Media المتخصصة في مجال الدعاية والإعلان.\nاعتمدت في تصميم الشعار على الجمع بين البساطة والاحترافية، باستخدام الألوان الأساسية الأسود والأبيض مع لمسة من اللون الرمادي لإبراز الوضوح.\nيحتوي الشعار على:\nرمز الماوس: كإشارة لعالم الميديا الرقمية.\nحرف F: الذي يمثل اسم الشركة \"فلاش\"، وصُمم ليعكس فكرة الومضة السريعة التي تُعبّر عن التأثير.\nهدف التصميم هو عكس هوية الشركة وقيمها المتمثلة في الابتكار، الجودة، والتميز.",
+          "gallery": [
+            "work/p/flash-0.jpg",
+            "work/p/flash-1.jpg",
+            "work/p/flash-2.jpg",
+            "work/p/flash-3.jpg"
+          ],
           "link": "https://www.behance.net/gallery/228286303/FLASH-Media"
         },
         {
-          "img": "work/pixel.jpg",
-          "title": "Pixman — هوية بصرية",
-          "year": 2025,
+          "id": "pixel",
+          "title": "Pixman — Pixel Coffee",
+          "subtitle": "",
+          "date": "2025-06",
+          "client": "",
+          "cover": "work/pixel.jpg",
+          "desc": "A new design joins my portfolio.\nThe \"Pixel\" logo design: a place where coffee meets pixel-inspired details.\nThe idea is based on combining digital elements with coffee, so the logo reflects the brand's identity in a simple yet distinctive way.",
+          "gallery": [
+            "work/p/pixel-0.jpg",
+            "work/p/pixel-1.jpg",
+            "work/p/pixel-2.jpg"
+          ],
           "link": "https://www.behance.net/gallery/228006933/Pixel"
         },
         {
-          "img": "work/dusur.jpg",
-          "title": "DUSUR Maritime — هوية بصرية",
-          "year": 2025,
-          "link": "https://www.behance.net/gallery/227292031/DUSUR"
-        },
-        {
-          "img": "work/aif.jpg",
-          "title": "Africa Investment Forum — شعار",
-          "year": 2025,
+          "id": "aif",
+          "title": "Africa Investment Forum",
+          "subtitle": "",
+          "date": "2025-06",
+          "client": "",
+          "cover": "work/aif.jpg",
+          "desc": "I was recently nominated as one of the individuals entrusted with designing a logo for the Africa Investment Forum, which will be hosted in Dar es Salaam, Tanzania.\nThrough this design, I aimed to capture the forum’s core message and purpose: showcasing Africa’s role as a promising investment hub that balances stability and economic opportunities. The design also reflects how natural resources can be leveraged to attract tourism and investment.\nInspired by Tanzania’s vibrant culture and identity, I incorporated symbols and colors that represent the host nation.",
+          "gallery": [
+            "work/p/aif-0.jpg",
+            "work/p/aif-1.jpg",
+            "work/p/aif-2.jpg",
+            "work/p/aif-3.jpg"
+          ],
           "link": "https://www.behance.net/gallery/227450415/the-Africa-Investment-Forum"
         },
         {
-          "img": "work/lawday.jpg",
+          "id": "dusur",
+          "title": "DUSUR Maritime",
+          "subtitle": "",
+          "date": "2025-06",
+          "client": "",
+          "cover": "work/dusur.jpg",
+          "desc": "Dusur Maritime Transport & Logistics Logo Design\nI’m very pleased to have designed the visual identity for Dusur, a company specializing in maritime transport and logistics services.\nThe logo is inspired by the concept of connection and integration, reflecting the company’s professionalism in managing maritime operations and supply chains, with a strong focus on innovation and quality in line with global standards.",
+          "gallery": [
+            "work/p/dusur-0.jpg",
+            "work/p/dusur-1.jpg",
+            "work/p/dusur-2.jpg",
+            "work/p/dusur-3.jpg",
+            "work/p/dusur-4.jpg",
+            "work/p/dusur-5.jpg",
+            "work/p/dusur-6.jpg"
+          ],
+          "link": "https://www.behance.net/gallery/227292031/DUSUR"
+        },
+        {
+          "id": "vellano",
+          "title": "VÉLLANO",
+          "subtitle": "",
+          "date": "2025-05",
+          "client": "",
+          "cover": "work/vellano.jpg",
+          "desc": "VÉLLANO – Where Elegance Meets Vision\n\nشعار VÉLLANO، علامة نظارات مستوحاة من جوهر التصميم الإيطالي الأنيق.\n\nجاء هذا الشعار ليعكس هوية بصرية توازن بين البساطة الكلاسيكية والطابع العصري، حيث تم اختيار خط كلاسيكي يعزز الإحساس بالفخامة والرصانة، مع دمج أيقونة بصرية بسيطة ومميزة تسهّل استخدام الشعار عبر مختلف المنصات والأغراض، وتُعبّر في الوقت ذاته عن جوهر العلامة.\n\nتم تصميم النظارات المستخدمة في الهوية بطابع إيطالي واضح لتقديم تجربة بصرية تعكس أصالة وأناقة المدرسة الإيطالية في التصميم، وهو ما يعكس التزام VÉLLANO بتقديم منتج لا يحمي البصر فحسب، بل يثري الحضور ويُعبّر عن التفرّد.",
+          "gallery": [
+            "work/p/vellano-0.jpg",
+            "work/p/vellano-1.jpg",
+            "work/p/vellano-2.jpg",
+            "work/p/vellano-3.jpg",
+            "work/p/vellano-4.jpg"
+          ],
+          "link": ""
+        },
+        {
+          "id": "lawday",
           "title": "شعار اليوم العالمي للقانون",
-          "year": 2022,
+          "subtitle": "",
+          "date": "2022-11",
+          "client": "",
+          "cover": "work/lawday.jpg",
+          "desc": "",
+          "gallery": [
+            "work/p/lawday-0.jpg"
+          ],
           "link": "https://www.behance.net/gallery/156090467/_"
         },
         {
-          "img": "work/aburgaya.jpg",
-          "title": "Aburgaya Group — شعار",
-          "year": 2022,
-          "link": "https://www.behance.net/gallery/152807425/Aburgaya-Group"
-        },
-        {
-          "img": "work/kdma.jpg",
-          "title": "خدمة — شعار",
-          "year": 2022,
+          "id": "kdma",
+          "title": "خدمة — Kdma",
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/kdma.jpg",
+          "desc": "kdma-خدمة\nتوفر في المساحات المشتركة والمكاتب الخاصة لأصحاب الشركات الناشئة ورواد الأعمال، في مكان نضمنو فيه راحتك وإنتاجيتك في بيئة عمل نظيفة، مميزة، خدمية، ومنتجة في وسط مدينة مصراتة",
+          "gallery": [
+            "work/p/kdma-0.jpg",
+            "work/p/kdma-1.jpg",
+            "work/p/kdma-2.jpg",
+            "work/p/kdma-3.jpg",
+            "work/p/kdma-4.jpg",
+            "work/p/kdma-5.jpg"
+          ],
           "link": "https://www.behance.net/gallery/153247781/-kdma"
         },
         {
-          "img": "work/photographer.jpg",
+          "id": "photographer",
           "title": "Ali Maafa — شعار مصوّر",
-          "year": 2022,
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/photographer.jpg",
+          "desc": "",
+          "gallery": [
+            "work/p/photographer-0.jpg"
+          ],
           "link": "https://www.behance.net/gallery/152433205/photographer-logo"
+        }
+      ]
+    },
+    {
+      "title": "هوية الفعاليات والمؤتمرات",
+      "en": "Events & Conferences",
+      "desc": "هوية متكاملة للفعاليات: من الشعار للبوستات والمطبوعات.",
+      "projects": [
+        {
+          "id": "mun-libya",
+          "title": "MUN Libya",
+          "subtitle": "من الفكرة إلى أرض الواقع",
+          "date": "2026-10",
+          "client": "MUN Libya",
+          "cover": "work/fb2.jpg",
+          "desc": "هوية بصرية كاملة لنموذج الأمم المتحدة في ليبيا: تصاميم السوشيال ميديا، الرول أب والبانرات، بطاقات أسماء المندوبين وتجهيز القاعة — كل قطعة بنفس اللغة البصرية.",
+          "gallery": [
+            "work/fb3.jpg",
+            "work/fb4.jpg",
+            "work/fb5.jpg",
+            "work/fb1.jpg"
+          ],
+          "link": "https://www.facebook.com/alberaDesigner"
         },
         {
-          "img": "work/medx.jpg",
-          "title": "MEDx Misrata — شعار مؤتمر",
-          "year": 2022,
+          "id": "itday",
+          "title": "اليوم الوطني لتقنية المعلومات",
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/itday.jpg",
+          "desc": "تصاميمي لليوم الوطني لتقنية المعلومات.\nيستهدف هذا الحدث المتخصصين والهواة في مجال التقنية، ويسعى لخلق فرص للتعاون والتشبيك، ونشر الوعي التقني داخل أراضي الوطن.",
+          "gallery": [
+            "work/p/itday-0.jpg",
+            "work/p/itday-1.jpg",
+            "work/p/itday-2.jpg",
+            "work/p/itday-3.jpg",
+            "work/p/itday-4.jpg",
+            "work/p/itday-5.jpg"
+          ],
+          "link": "https://www.behance.net/gallery/153109603/_"
+        },
+        {
+          "id": "medx",
+          "title": "MEDx Misrata",
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/medx.jpg",
+          "desc": "مؤتمر يدعو كبار الأطباء والأخصائيين في مجال الطب البشري في مدينة مصراتة للحديث مع طلبة الطب وحديثي التخرج عن تجاربهم وخبراتهم، والحرص على تنمية الثقافة الطبية وتوضيح المسارات ما بعد التخرج. يعقد هذا الحدث لأول مرة في مدينة مصراتة.",
+          "gallery": [
+            "work/p/medx-0.jpg",
+            "work/p/medx-1.jpg",
+            "work/p/medx-2.jpg",
+            "work/p/medx-3.jpg",
+            "work/p/medx-4.jpg",
+            "work/p/medx-5.jpg",
+            "work/p/medx-6.jpg",
+            "work/p/medx-7.jpg",
+            "work/p/medx-8.jpg",
+            "work/p/medx-9.jpg",
+            "work/p/medx-10.jpg",
+            "work/p/medx-11.jpg"
+          ],
           "link": "https://www.behance.net/gallery/152317493/MEDx-Misrata"
         }
       ]
@@ -121,24 +248,53 @@
       "title": "تصاميم السوشيال ميديا",
       "en": "Social Media",
       "desc": "بوستات وحملات لصفحات الشركات والمناسبات.",
-      "items": [
+      "projects": [
         {
-          "img": "work/services.jpg",
-          "title": "حملة سوشيال ميديا — شركة خدمات عامة",
-          "year": 2022,
+          "id": "services",
+          "title": "حملة متجرنا — شركة خدمات عامة",
+          "subtitle": "",
+          "date": "2022-10",
+          "client": "",
+          "cover": "work/services.jpg",
+          "desc": "",
+          "gallery": [
+            "work/p/services-0.jpg",
+            "work/p/services-1.jpg",
+            "work/p/services-2.jpg",
+            "work/p/services-3.jpg",
+            "work/p/services-4.jpg"
+          ],
           "link": "https://www.behance.net/gallery/155014901/_"
         },
         {
-          "img": "work/captain.jpg",
-          "title": "شارة الكابتن الفلسطينية — كأس العالم",
-          "year": 2022,
+          "id": "captain",
+          "title": "شارة الكابتن الفلسطينية",
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/captain.jpg",
+          "desc": "",
+          "gallery": [
+            "work/p/captain-0.jpg",
+            "work/p/captain-1.jpg"
+          ],
           "link": "https://www.behance.net/gallery/153701071/_"
         },
         {
-          "img": "work/itday.jpg",
-          "title": "اليوم الوطني لتقنية المعلومات",
-          "year": 2022,
-          "link": "https://www.behance.net/gallery/153109603/_"
+          "id": "aburgaya",
+          "title": "Aburgaya Group — ترامنتينا",
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/aburgaya.jpg",
+          "desc": "وكيل معتمد لشركة ترامنتينا البرازيلية في ليبيا",
+          "gallery": [
+            "work/p/aburgaya-0.jpg",
+            "work/p/aburgaya-1.jpg",
+            "work/p/aburgaya-2.jpg",
+            "work/p/aburgaya-3.jpg"
+          ],
+          "link": "https://www.behance.net/gallery/152807425/Aburgaya-Group"
         }
       ]
     },
@@ -146,35 +302,74 @@
       "title": "تصاميم إبداعية عامة",
       "en": "Creative & Manipulation",
       "desc": "أفكار إعلانية ودمج صور (Manipulation) بأسلوب سينمائي.",
-      "items": [
+      "projects": [
         {
-          "img": "work/mamaafrica.jpg",
+          "id": "mamaafrica",
           "title": "Mama Africa",
-          "year": 2022,
+          "subtitle": "",
+          "date": "2022-10",
+          "client": "",
+          "cover": "work/mamaafrica.jpg",
+          "desc": "",
+          "gallery": [
+            "work/p/mamaafrica-0.jpg",
+            "work/p/mamaafrica-1.jpg"
+          ],
           "link": "https://www.behance.net/gallery/155299569/mama-africa"
         },
         {
-          "img": "work/libya.jpg",
+          "id": "libya",
           "title": "Libya — ليبيا",
-          "year": 2022,
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/libya.jpg",
+          "desc": "",
+          "gallery": [
+            "work/p/libya-0.jpg",
+            "work/p/libya-1.jpg"
+          ],
           "link": "https://www.behance.net/gallery/153482077/Libya"
         },
         {
-          "img": "work/pepsi.jpg",
+          "id": "pepsi",
           "title": "إعلان غير رسمي — Pepsi",
-          "year": 2022,
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/pepsi.jpg",
+          "desc": "",
+          "gallery": [
+            "work/p/pepsi-0.jpg",
+            "work/p/pepsi-1.jpg"
+          ],
           "link": "https://www.behance.net/gallery/153392705/_"
         },
         {
-          "img": "work/chess.jpg",
+          "id": "chess",
           "title": "كش ملك — Check Mate",
-          "year": 2022,
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/chess.jpg",
+          "desc": "كش ملك — تم تصميم المجسمات بواسطة الإليستريتور.",
+          "gallery": [
+            "work/p/chess-0.jpg"
+          ],
           "link": "https://www.behance.net/gallery/152933617/_"
         },
         {
-          "img": "work/merge.jpg",
+          "id": "merge",
           "title": "محاولة دمج — Manipulation",
-          "year": 2022,
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/merge.jpg",
+          "desc": "قبل — Before",
+          "gallery": [
+            "work/p/merge-0.jpg",
+            "work/p/merge-1.jpg"
+          ],
           "link": "https://www.behance.net/gallery/152582883/_"
         }
       ]
