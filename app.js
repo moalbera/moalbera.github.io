@@ -30,7 +30,7 @@ function fillCommon(D){
 }
 
 function projectCard(p){
-  return `<a class="pcard glass rv" href="${projUrl(p)}">
+  return `<a class="pcard glass spot tilt rv" href="${projUrl(p)}">
     <div class="ph"><img src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy">
       <div class="ov"><span>شوف المشروع ←</span><span class="cnt">${(p.gallery||[]).length+1} صور</span></div></div>
     <div class="cap"><h4>${esc(p.title)}</h4>${p.date?`<span class="yr">${esc(yearOf(p.date))}</span>`:''}</div></a>`;
@@ -58,4 +58,62 @@ const LB=(()=>{
   return {open(l,i){list=l;idx=i;show();el.classList.add('open');document.body.style.overflow='hidden';}};
 })();
 
+function videoCard(v){
+  return `<a class="vcard glass spot" href="${esc(v.url)}" target="_blank" rel="noopener">
+    <div class="ph"><img src="${esc(v.thumb)}" alt="${esc(v.title)}" loading="lazy">
+      ${v.views?`<span class="views"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>${esc(v.views)}</span>`:''}
+      <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      <div class="vt"><h4>${esc(v.title)}</h4>${v.desc?`<p>${esc(v.desc)}</p>`:''}</div></div></a>`;
+}
+function parseViews(s){const m=String(s||'').trim().match(/^([\d.]+)\s*([KkMm])?/);if(!m)return 0;return parseFloat(m[1])*(/[Kk]/.test(m[2]||'')?1e3:/[Mm]/.test(m[2]||'')?1e6:1);}
 function loadData(){return fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json());}
+
+/* ===== MOTION: يخلّي الموقع حي ===== */
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE=matchMedia('(pointer: fine)').matches;
+function splitText(el){
+  if(!el||REDUCED)return; const t=el.textContent; el.classList.add('split');
+  el.innerHTML=[...t].map((c,i)=>c===' '?' ':`<span class="ch" style="--i:${i}">${esc(c)}</span>`).join('');
+}
+function stagger(){ // تأخير متدرّج للعناصر اللي جنب بعض
+  document.querySelectorAll('.grid,.services,.steps,.stats,.vids,.feature-grid,.cat-nav').forEach(g=>[...g.children].forEach((c,i)=>c.style.setProperty('--d',Math.min(i,8)*70+'ms')));
+}
+function counters(){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;io.unobserve(en.target);
+    const el=en.target,to=parseFloat(el.dataset.to),suf=el.dataset.suf||'',pre=el.dataset.pre||'',dec=+(el.dataset.dec||0);
+    if(REDUCED){el.textContent=pre+to.toFixed(dec)+suf;return;}
+    const t0=performance.now(),dur=1800;
+    const tick=now=>{const k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,4);el.textContent=pre+(to*e).toFixed(dec)+suf;if(k<1)requestAnimationFrame(tick);};
+    requestAnimationFrame(tick);}),{threshold:.5});
+  document.querySelectorAll('[data-to]').forEach(el=>io.observe(el));
+}
+function motion(){
+  // شريط التقدّم فوق
+  const bar=document.createElement('div');bar.className='progress';document.body.appendChild(bar);
+  const bg=document.querySelector('.bg svg');
+  let mx=0,my=0,sy=0;
+  const upd=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?scrollY/h:0})`;
+    if(bg&&!REDUCED)bg.style.transform=`translate(calc(-50% + ${mx*30}px), calc(-50% + ${my*30 - scrollY*0.08}px)) scale(${1+Math.min(scrollY,2000)/8000}) rotate(${scrollY*0.01}deg)`;};
+  addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
+  addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;requestAnimationFrame(upd);},{passive:true});
+  upd();
+  if(REDUCED)return;
+  // ضوء يلحق الماوس على الكروت الزجاجية
+  document.addEventListener('pointermove',e=>{const c=e.target.closest('.glass.spot');if(!c)return;const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');},{passive:true});
+  if(!FINE)return;
+  // ميلان ثلاثي الأبعاد للمربعات
+  document.addEventListener('pointermove',e=>{const c=e.target.closest('.tilt');document.querySelectorAll('.tilt.tilting').forEach(o=>{if(o!==c){o.classList.remove('tilting');o.style.transform='';}});
+    if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.classList.add('tilting');c.style.transform=`perspective(900px) rotateX(${-y*8}deg) rotateY(${x*8}deg) translateY(-6px)`;},{passive:true});
+  document.addEventListener('pointerleave',()=>document.querySelectorAll('.tilt').forEach(o=>o.style.transform=''));
+  // أزرار مغناطيسية
+  document.addEventListener('pointermove',e=>{document.querySelectorAll('.magnet').forEach(b=>{const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=e.clientX-cx,dy=e.clientY-cy,d=Math.hypot(dx,dy);
+    b.style.transform=d<110?`translate(${dx*.25}px,${dy*.3}px)`:'';});},{passive:true});
+  // مؤشر ماوس مخصص
+  const cur=document.createElement('div');cur.className='cursor';const dot=document.createElement('div');dot.className='cursor-dot';document.body.append(cur,dot);
+  let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
+  addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;dot.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`;
+    cur.classList.toggle('big',!!e.target.closest('a,button,.pcard,.vcard,[data-i]'));},{passive:true});
+  (function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+}

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../style.css?v=1795103882">
 <style>
 body{min-height:100vh}
 .shell{width:min(1180px,100% - 32px);margin:0 auto;padding:100px 0 140px}
@@ -215,7 +215,7 @@ const inp=(p,label,o={})=>`<label class="f">${label}<input type="${o.type||'text
 const ta=(p,label,hint='')=>`<label class="f">${label}<textarea data-p="${p}" dir="auto" style="${/desc|text|intro/.test(p)?'min-height:170px':''}">${esc(getP(p))}</textarea>${hint?`<span class="hint">${hint}</span>`:''}</label>`;
 
 /* ---------- TABS ---------- */
-const TABS=[['works','الأعمال'],['featured','المشروع المميز'],['texts','النصوص الرئيسية'],['services','الخدمات وطريقة الشغل'],['about','عني'],['contact','التواصل']];
+const TABS=[['works','الأعمال'],['featured','المشروع المميز'],['videos','الفيديوهات'],['texts','النصوص الرئيسية'],['services','الخدمات وطريقة الشغل'],['about','عني'],['contact','التواصل']];
 function drawTabs(){$('#tabs').innerHTML=TABS.map(([k,t])=>`<button class="glass ${k===TAB?'on':''}" data-tab="${k}">${t}</button>`).join('');}
 $('#tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;TAB=b.dataset.tab;EDIT=null;draw();scrollTo(0,0);};
 function draw(){drawTabs();$('#view').innerHTML=V[TAB]();}
@@ -283,6 +283,27 @@ featured(){
     <div class="row">${inp('featured.label','الشارة البيضاء (مثلاً: الأحدث)')}${inp('featured.tag','نوع المشروع')}</div>
   </div>`;
 },
+videos(){
+  D.videos=D.videos||{show:true,title:'فيديوهاتي',intro:'',items:[]};const VV=D.videos;
+  return `<div class="panel glass"><h3>الفيديوهات</h3><div class="sub">فيديوهاتك من الفيس أو الإنستا. الزائر يضغط على الفيديو ويفتحله في صفحته الأصلية.</div>
+    <label class="check" style="margin-bottom:18px"><input type="checkbox" data-p="videos.show" ${VV.show?'checked':''}> اعرض قسم الفيديوهات في الموقع</label>
+    <div class="row">${inp('videos.title','عنوان القسم')}${inp('videos.intro','الجملة تحت العنوان')}</div>
+  </div>
+  <div class="panel glass"><h3>القائمة</h3><div class="sub">أول فيديو يطلع في الأول. الصورة طولية (زي الريلز).</div>
+    <div class="items">
+      <button class="add" data-act="vAdd">＋ أضف فيديو<br><span class="hint">اختار صورة الغلاف، وبعدها حط الرابط</span></button>
+      ${(VV.items||[]).map((v,i)=>`<div class="it glass">
+        <div class="thumb" data-act="vThumb" data-i="${i}" style="aspect-ratio:9/16;max-height:340px"><img src="${esc(src(v.thumb))}" alt="" loading="lazy"><span>بدّل الغلاف</span></div>
+        <div class="fields">
+          <input type="text" data-p="videos.items.${i}.title" value="${esc(v.title)}" placeholder="عنوان الفيديو">
+          <input type="url" dir="ltr" data-p="videos.items.${i}.url" value="${esc(v.url)}" placeholder="رابط الفيديو (فيس / إنستا / يوتيوب)">
+          <div class="two"><input type="text" dir="ltr" data-p="videos.items.${i}.views" value="${esc(v.views)}" placeholder="مثلاً 14K"><input type="text" data-p="videos.items.${i}.desc" value="${esc(v.desc)}" placeholder="وصف قصير"></div>
+          <span class="hint">خانة المشاهدات اختيارية (مثلاً 14K)</span>
+        </div>
+        <div class="tools"><button class="ib glass" data-act="vUp" data-i="${i}">→</button><button class="ib glass" data-act="vDown" data-i="${i}">←</button><button class="ib glass del" data-act="vDel" data-i="${i}">🗑</button></div>
+      </div>`).join('')}
+    </div></div>`;
+},
 texts(){
   return `<div class="panel glass"><h3>أول الصفحة</h3><div class="sub">الكلام اللي يشوفه الزائر أول ما يفتح الموقع.</div>
     <div class="row">${inp('site.name','الاسم الكبير',{ltr:1})}${inp('site.status','الشارة الصغيرة فوق')}</div>
@@ -349,6 +370,11 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(
     case 'gUp': move(P.gallery,ii,-1);break;
     case 'gDown': move(P.gallery,ii,1);break;
     case 'gDel': if(confirm('تمسح الصورة هذي؟')){P.gallery.splice(ii,1);setDirty(true);draw();}break;
+    case 'vAdd': withUpload(false,ps=>{D.videos.items.unshift({thumb:ps[0],title:'فيديو جديد',desc:'',url:'',views:''});});break;
+    case 'vThumb': withUpload(false,ps=>D.videos.items[ii].thumb=ps[0]);break;
+    case 'vUp': move(D.videos.items,ii,-1);break;
+    case 'vDown': move(D.videos.items,ii,1);break;
+    case 'vDel': if(confirm('تمسح الفيديو "'+D.videos.items[ii].title+'"؟')){D.videos.items.splice(ii,1);setDirty(true);draw();}break;
     case 'lUp': move(D[b.dataset.k],ii,-1);break;
     case 'lDown': move(D[b.dataset.k],ii,1);break;
     case 'lDel': if(confirm('متأكد؟')){D[b.dataset.k].splice(ii,1);setDirty(true);draw();}break;
