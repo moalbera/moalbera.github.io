@@ -30,7 +30,7 @@ function fillCommon(D){
 }
 
 function projectCard(p){
-  return `<a class="pcard glass spot tilt rv" href="${projUrl(p)}">
+  return `<a class="pcard glass spot rv" href="${projUrl(p)}">
     <div class="ph"><img src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy">
       <div class="ov"><span>شوف المشروع ←</span><span class="cnt">${(p.gallery||[]).length+1} صور</span></div></div>
     <div class="cap"><h4>${esc(p.title)}</h4>${p.date?`<span class="yr">${esc(yearOf(p.date))}</span>`:''}</div></a>`;
@@ -88,32 +88,13 @@ function counters(){
   document.querySelectorAll('[data-to]').forEach(el=>io.observe(el));
 }
 function motion(){
-  // شريط التقدّم فوق
+  // خفيف: شريط تقدّم بس + ضوء على الكرت اللي تحت الماوس (بدون أي حلقة رسم مستمرة)
   const bar=document.createElement('div');bar.className='progress';document.body.appendChild(bar);
-  const bg=document.querySelector('.bg svg');
-  let mx=0,my=0,sy=0;
-  const upd=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?scrollY/h:0})`;
-    if(bg&&!REDUCED)bg.style.transform=`translate(calc(-50% + ${mx*30}px), calc(-50% + ${my*30 - scrollY*0.08}px)) scale(${1+Math.min(scrollY,2000)/8000}) rotate(${scrollY*0.01}deg)`;};
-  addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
-  addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;requestAnimationFrame(upd);},{passive:true});
-  upd();
-  if(REDUCED)return;
-  // ضوء يلحق الماوس على الكروت الزجاجية
-  document.addEventListener('pointermove',e=>{const c=e.target.closest('.glass.spot');if(!c)return;const r=c.getBoundingClientRect();
-    c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');},{passive:true});
-  if(!FINE)return;
-  // ميلان ثلاثي الأبعاد للمربعات
-  document.addEventListener('pointermove',e=>{const c=e.target.closest('.tilt');document.querySelectorAll('.tilt.tilting').forEach(o=>{if(o!==c){o.classList.remove('tilting');o.style.transform='';}});
-    if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    c.classList.add('tilting');c.style.transform=`perspective(900px) rotateX(${-y*8}deg) rotateY(${x*8}deg) translateY(-6px)`;},{passive:true});
-  document.addEventListener('pointerleave',()=>document.querySelectorAll('.tilt').forEach(o=>o.style.transform=''));
-  // أزرار مغناطيسية
-  document.addEventListener('pointermove',e=>{document.querySelectorAll('.magnet').forEach(b=>{const r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=e.clientX-cx,dy=e.clientY-cy,d=Math.hypot(dx,dy);
-    b.style.transform=d<110?`translate(${dx*.25}px,${dy*.3}px)`:'';});},{passive:true});
-  // مؤشر ماوس مخصص
-  const cur=document.createElement('div');cur.className='cursor';const dot=document.createElement('div');dot.className='cursor-dot';document.body.append(cur,dot);
-  let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
-  addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;dot.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`;
-    cur.classList.toggle('big',!!e.target.closest('a,button,.pcard,.vcard,[data-i]'));},{passive:true});
-  (function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+  let ticking=false;
+  addEventListener('scroll',()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?scrollY/h:0})`;ticking=false;});},{passive:true});
+  if(REDUCED||!FINE)return;
+  let last=null;
+  document.addEventListener('pointerover',e=>{last=e.target.closest('.glass.spot');},{passive:true});
+  document.addEventListener('pointermove',e=>{if(!last)return;const r=last.getBoundingClientRect();
+    last.style.setProperty('--mx',(e.clientX-r.left)+'px');last.style.setProperty('--my',(e.clientY-r.top)+'px');},{passive:true});
 }
