@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mo Albera — مصمم جرافيك</title>
+<meta name="description" content="محمد البيرة — مصمم جرافيك من مصراتة، ليبيا. هوية بصرية، شعارات، تصاميم سوشيال ميديا وإعلانات.">
+<meta property="og:title" content="Mo Albera — مصمم جرافيك">
+<meta property="og:description" content="تصاميم تتكلم أعلى من الكلام. هوية بصرية، شعارات، سوشيال ميديا وإعلانات.">
+<meta property="og:image" content="work/fb2.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090c; --bg2:#111117; --card:#15151d; --line:#24242f;
+  --text:#f3f1ea; --muted:#9a98a6; --accent:#3d5cff; --accent2:#c8ff3d;
+  --radius:22px;
+  --ff:'Readex Pro',system-ui,sans-serif; --serif:'Instrument Serif',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--text);font-family:var(--ff);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+.en{unicode-bidi:isolate;direction:ltr;display:inline-block;font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.01em}
+/* grain */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* NAV */
+nav{position:fixed;top:14px;inset-inline:0;z-index:50}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 12px 10px 20px;
+  background:rgba(17,17,23,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.02em;direction:ltr}
+.logo .mark{width:34px;height:34px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:20px}
+.links{display:flex;gap:4px}
+.links a{padding:8px 16px;border-radius:999px;color:var(--muted);font-size:15px;transition:.25s}
+.links a:hover{color:var(--text);background:var(--line)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;font-weight:500;font-size:15px;transition:.3s;border:1px solid transparent;cursor:pointer;white-space:nowrap}
+.btn-main{background:var(--text);color:var(--bg)}
+.btn-main:hover{background:var(--accent2)}
+.btn-ghost{border-color:var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text)}
+.btn svg{width:18px;height:18px}
+.menu-btn{display:none;background:none;border:0;color:var(--text);width:40px;height:40px;cursor:pointer}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 0 60px;position:relative;overflow:clip;isolation:isolate}
+.glow{position:absolute;width:620px;height:620px;border-radius:50%;filter:blur(120px);opacity:.35;z-index:-1;background:var(--accent);top:-120px;left:-180px}
+.glow.g2{background:#7a3dff;opacity:.18;top:auto;bottom:-200px;left:auto;right:-200px}
+.tag{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--muted);margin-bottom:28px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 0 rgba(200,255,61,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(200,255,61,0)}100%{box-shadow:0 0 0 0 rgba(200,255,61,0)}}
+h1{font-size:clamp(44px,8.4vw,122px);line-height:1.05;font-weight:700;letter-spacing:-.02em}
+h1 .en{color:var(--accent);font-size:1.05em}
+h1 .out{color:transparent;-webkit-text-stroke:1.5px var(--text)}
+.hero p.lead{max-width:560px;font-size:clamp(17px,1.6vw,20px);color:var(--muted);margin:28px 0 36px;font-weight:300}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:40px;margin-top:70px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.hero-meta b{display:block;color:var(--text);font-size:17px;font-weight:500}
+
+/* MARQUEE */
+.marquee{overflow:hidden;padding:10px 0 30px;direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:18px;width:max-content;animation:scroll 60s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track img{height:260px;width:auto;border-radius:16px;aspect-ratio:808/632;object-fit:cover}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:110px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:50px;flex-wrap:wrap}
+.eyebrow{color:var(--accent2);font-size:14px;letter-spacing:.08em;margin-bottom:14px;display:block}
+h2{font-size:clamp(34px,5vw,64px);line-height:1.1;font-weight:600;letter-spacing:-.01em}
+h2 .en{color:var(--muted)}
+.sec-head p{max-width:420px;color:var(--muted)}
+
+/* CASE STUDY */
+.case{background:var(--bg2);border:1px solid var(--line);border-radius:32px;padding:clamp(22px,4vw,48px);overflow:hidden}
+.case-top{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center}
+.case h3{font-size:clamp(28px,3.4vw,44px);line-height:1.2;font-weight:600;margin:10px 0 16px}
+.case p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{padding:6px 14px;border-radius:999px;background:var(--line);font-size:13px;color:var(--text)}
+.case-hero{border-radius:20px;overflow:hidden;cursor:zoom-in}
+.case-hero img{width:100%;transition:transform .8s}
+.case-hero:hover img{transform:scale(1.03)}
+.case-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.case-grid div{border-radius:16px;overflow:hidden;cursor:zoom-in;aspect-ratio:1}
+.case-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.case-grid div:hover img{transform:scale(1.06)}
+
+/* WORK GRID */
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{background:transparent;border:1px solid var(--line);color:var(--muted);padding:9px 18px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer;transition:.25s}
+.filters button.on,.filters button:hover{background:var(--text);color:var(--bg);border-color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.item{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--card);cursor:zoom-in;transition:opacity .4s, transform .4s}
+.item.hide{display:none}
+.item .ph{aspect-ratio:808/632;overflow:hidden}
+.item img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.item:hover img{transform:scale(1.06)}
+.item .cap{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 18px}
+.item .cap h4{font-weight:500;font-size:16px}
+.item .cap span{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:3px 10px;border-radius:999px;white-space:nowrap}
+
+/* SERVICES */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:32px;transition:.35s;position:relative;overflow:hidden}
+.svc:hover{border-color:var(--accent);transform:translateY(-4px)}
+.svc .num{font-family:var(--serif);font-style:italic;font-size:42px;color:var(--accent);line-height:1}
+.svc h3{font-size:22px;font-weight:600;margin:22px 0 10px}
+.svc p{color:var(--muted);font-size:15px}
+
+/* PROCESS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.step{padding:30px 24px 10px 0;border-inline-start:1px solid var(--line);padding-inline-start:24px}
+.step:first-child{border-inline-start:0;padding-inline-start:0}
+.step b{display:block;font-size:13px;color:var(--accent2);margin-bottom:10px}
+.step h3{font-size:20px;font-weight:600;margin-bottom:8px}
+.step p{color:var(--muted);font-size:15px}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+.about .big-text{font-size:clamp(24px,2.8vw,36px);line-height:1.5;font-weight:400}
+.about .big-text em{font-style:normal;color:var(--accent)}
+.brands{display:flex;flex-wrap:wrap;gap:10px}
+.brands span{padding:12px 20px;border:1px solid var(--line);border-radius:14px;font-size:15px;direction:ltr;transition:.25s}
+.brands span:hover{border-color:var(--accent2);color:var(--accent2)}
+
+/* CONTACT */
+.contact{text-align:center;padding:120px 0 80px}
+.contact h2{font-size:clamp(44px,8vw,120px);line-height:1}
+.contact h2 .en{color:var(--accent)}
+.contact p{color:var(--muted);max-width:520px;margin:24px auto 40px;font-size:18px}
+.contact .hero-cta{justify-content:center}
+.socials{display:flex;justify-content:center;gap:12px;margin-top:50px;flex-wrap:wrap}
+.socials a{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.25s}
+.socials a:hover{background:var(--text);color:var(--bg)}
+.socials svg{width:20px;height:20px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(5,5,8,.94);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:70px 20px 90px}
+.lb.open{display:flex}
+.lb img{max-height:100%;max-width:min(1300px,100%);border-radius:14px;object-fit:contain;animation:zoomin .35s ease}
+@keyframes zoomin{from{opacity:0;transform:scale(.96)}}
+.lb-cap{position:absolute;bottom:26px;inset-inline:0;text-align:center;color:var(--muted);font-size:15px}
+.lb-cap a{color:var(--accent2);margin-inline-start:10px}
+.lb button{position:absolute;background:var(--card);border:1px solid var(--line);color:var(--text);width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:22px;display:grid;place-items:center}
+.lb .x{top:18px;left:18px}
+.lb .prev{right:18px;top:50%;transform:translateY(-50%)}
+.lb .next{left:18px;top:50%;transform:translateY(-50%)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.track{animation:none}}
+
+/* WHATSAPP FLOAT */
+.wa{position:fixed;bottom:22px;left:22px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.35);transition:.3s}
+.wa:hover{transform:scale(1.08)}
+.wa svg{width:28px;height:28px}
+
+/* RESPONSIVE */
+@media (max-width:980px){
+  .case-top,.about{grid-template-columns:1fr}
+  .grid,.services{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .step:nth-child(3){border-inline-start:0;padding-inline-start:0}
+}
+@media (max-width:760px){
+  .links,.nav-cta{display:none}
+  .menu-btn{display:grid;place-items:center}
+  nav.open .links{display:flex;position:absolute;top:66px;inset-inline:0;flex-direction:column;background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:10px}
+  .wrap{width:calc(100% - 32px)}
+  .grid,.services{grid-template-columns:1fr}
+  .case-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .step{border-inline-start:0!important;padding-inline-start:0!important;border-bottom:1px solid var(--line);padding-bottom:24px}
+  .track img{height:170px}
+  section{padding:80px 0}
+  .hero-meta{gap:24px}
+  footer{padding-bottom:96px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo"><span class="mark">m</span>Mo Albera</a>
+    <div class="links">
+      <a href="#work">الأعمال</a>
+      <a href="#services">الخدمات</a>
+      <a href="#about">عني</a>
+      <a href="#contact">تواصل</a>
+    </div>
+    <a href="#contact" class="btn btn-main nav-cta">اطلب تصميمك</a>
+    <button class="menu-btn" aria-label="القائمة" onclick="document.getElementById('nav').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div><div class="glow g2"></div>
+  <div class="wrap">
+    <span class="tag"><span class="dot"></span>متاح لمشاريع جديدة</span>
+    <h1>تصاميم تتكلّم<br><span class="out">أعلى</span> من الكلام<br><span class="en">— Mo Albera</span></h1>
+    <p class="lead">مصمم جرافيك من مصراتة، ليبيا. نساعد العلامات التجارية والفعاليات إنها تحكي قصتها بصرياً — من الشعار والهوية، لين آخر بوست على السوشيال ميديا.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-main">شوف أعمالي
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+      <a href="https://wa.me/218945345203" target="_blank" rel="noopener" class="btn btn-ghost">تواصل على واتساب</a>
+    </div>
+    <div class="hero-meta">
+      <div><b>هوية بصرية</b>شعارات وعلامات تجارية</div>
+      <div><b>سوشيال ميديا</b>بوستات وحملات</div>
+      <div><b>فعاليات</b>هوية مؤتمرات ومطبوعات</div>
+      <div><b>مصراتة، ليبيا</b>نشتغل مع عملاء من كل مكان</div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section id="case">
+  <div class="wrap">
+    <div class="case rv">
+      <div class="case-top">
+        <div>
+          <span class="eyebrow">مشروع مميز · 2026</span>
+          <h3>MUN Libya<br>من الفكرة إلى أرض الواقع</h3>
+          <p>هوية بصرية كاملة لنموذج الأمم المتحدة في ليبيا: من التصميم الرقمي للسوشيال ميديا، للرول أب والبانرات، لبطاقات أسماء المندوبين وتجهيز القاعة. كل قطعة مبنية على نفس اللغة البصرية.</p>
+          <div class="chips">
+            <span class="chip">هوية فعالية</span><span class="chip">سوشيال ميديا</span><span class="chip">رول أب</span><span class="chip">بطاقات المندوبين</span><span class="chip">مطبوعات</span>
+          </div>
+        </div>
+        <div class="case-hero" data-lb="fb2.jpg" data-t="MUN Libya — من الفكرة إلى أرض الواقع"><img src="work/fb2.jpg" alt="MUN Libya — الغلاف" loading="lazy"></div>
+      </div>
+      <div class="case-grid">
+        <div data-lb="fb3.jpg" data-t="MUN Libya — التصميم الرقمي للسوشيال ميديا"><img src="work/fb3.jpg" alt="MUN Libya سوشيال ميديا" loading="lazy"></div>
+        <div data-lb="fb4.jpg" data-t="MUN Libya — الرول أب والأعلام"><img src="work/fb4.jpg" alt="MUN Libya رول أب" loading="lazy"></div>
+        <div data-lb="fb5.jpg" data-t="MUN Libya — القاعة والتطبيق"><img src="work/fb5.jpg" alt="MUN Libya القاعة" loading="lazy"></div>
+        <div data-lb="fb1.jpg" data-t="MUN Libya — بطاقات أسماء المندوبين"><img src="work/fb1.jpg" alt="MUN Libya بطاقات المندوبين" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow">Selected Work</span>
+        <h2>أعمال مختارة <span class="en">portfolio</span></h2>
+      </div>
+      <div class="filters" id="filters">
+        <button class="on" data-f="all">الكل</button>
+        <button data-f="brand">هوية وشعارات</button>
+        <button data-f="social">سوشيال ميديا</button>
+        <button data-f="creative">إعلانات إبداعية</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h2>شنو نقدّم لك</h2>
+      </div>
+      <p>كل مشروع يبدأ بفهم قصتك وجمهورك، وبعدها نحوّلها لتصميم واضح يعلق في الذاكرة.</p>
+    </div>
+    <div class="services">
+      <div class="svc rv"><div class="num">01</div><h3>هوية بصرية وشعارات</h3><p>شعار، ألوان، خطوط، ودليل استخدام — هوية متكاملة تخلّي علامتك معروفة من أول نظرة.</p></div>
+      <div class="svc rv"><div class="num">02</div><h3>تصاميم سوشيال ميديا</h3><p>بوستات، كاروسيل، ستوريز وأغلفة بهوية موحّدة تخلّي صفحتك تبان احترافية.</p></div>
+      <div class="svc rv"><div class="num">03</div><h3>تصاميم إعلانية إبداعية</h3><p>إعلانات بفكرة قوية ودمج صور (Manipulation) تشد الانتباه وتوصّل الرسالة.</p></div>
+      <div class="svc rv"><div class="num">04</div><h3>هوية فعاليات ومؤتمرات</h3><p>من البوستر للرول أب، البادجات، الشهادات وتجهيز المكان — كل شي بنفس اللغة.</p></div>
+      <div class="svc rv"><div class="num">05</div><h3>إنفوغرافيك ومحتوى تقني</h3><p>تبسيط المعلومات والمواصفات في تصاميم واضحة — للشركات والمعدات والمنتجات.</p></div>
+      <div class="svc rv"><div class="num">06</div><h3>مطبوعات</h3><p>منيوهات، فلايرات، بطاقات وملصقات جاهزة للطباعة بجودة عالية.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="eyebrow">Process</span><h2>كيف نشتغلوا</h2></div></div>
+    <div class="steps rv">
+      <div class="step"><b>01</b><h3>نسمعك</h3><p>نتكلموا على فكرتك، جمهورك، وشن تبي توصل.</p></div>
+      <div class="step"><b>02</b><h3>الفكرة</h3><p>بحث ومودبورد واتجاه بصري واضح قبل أي تصميم.</p></div>
+      <div class="step"><b>03</b><h3>التصميم</h3><p>نصمم ونعرض عليك، ونعدّل لين يطلع زي ما تبي.</p></div>
+      <div class="step"><b>04</b><h3>التسليم</h3><p>ملفات نهائية جاهزة للسوشيال والطباعة بكل المقاسات.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="rv">
+      <span class="eyebrow">About</span>
+      <p class="big-text">أنا <em>محمد البيرة</em>، مصمم جرافيك وطالب تقنية معلومات من مصراتة. نؤمن إن التصميم الجيد مش بس شكل حلو — هو <em>رسالة</em> واضحة توصل بسرعة وتعلق في الذاكرة.</p>
+    </div>
+    <div class="rv">
+      <span class="eyebrow">مشاريع وعلامات اشتغلت عليها</span>
+      <div class="brands">
+        <span>MUN Libya</span><span>MEDx Misrata</span><span>Aburgaya Group</span><span>DUSUR Maritime</span><span>FLASH Media</span><span>VÉLLANO</span><span>Pixman</span><span>Khdma</span><span>Ali Maafa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap rv">
+    <span class="eyebrow">Let's work together</span>
+    <h2>عندك فكرة؟<br><span class="en">let's talk.</span></h2>
+    <p>ابعثلي على واتساب أو الإيميل، واحكيلي على مشروعك — ونرد عليك في أقرب وقت.</p>
+    <div class="hero-cta">
+      <a href="https://wa.me/218945345203" target="_blank" rel="noopener" class="btn btn-main">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+        واتساب <bdi dir="ltr">094-5345203</bdi></a>
+      <a href="mailto:mohamedalbera01@gmail.com" class="btn btn-ghost">mohamedalbera01@gmail.com</a>
+    </div>
+    <div class="socials">
+      <a href="https://www.behance.net/moalberaDesigner" target="_blank" rel="noopener" aria-label="Behance"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.2 11.3c.8-.4 1.3-1.1 1.3-2.1C9.5 7.1 7.9 6.5 6 6.5H1v11h5.2c2 0 3.8-.9 3.8-3.1 0-1.4-.7-2.5-1.8-3.1zM3.3 8.4h2.2c.8 0 1.6.2 1.6 1.2 0 .9-.6 1.2-1.4 1.2H3.3V8.4zm2.5 7.2H3.3v-3h2.6c1 0 1.7.4 1.7 1.5s-.8 1.5-1.8 1.5zM15.4 9.2c-2.5 0-4.1 1.8-4.1 4.2 0 2.5 1.5 4.2 4.1 4.2 1.9 0 3.2-.9 3.8-2.8h-2c-.2.7-1.1 1-1.7 1-1.3 0-2-.7-2-2h5.8c.1-2.6-1.3-4.6-3.9-4.6zm-1.9 3.4c.1-1.1.8-1.7 1.8-1.7 1.1 0 1.6.6 1.7 1.7h-3.5zM13.6 6.9h4.5v1.3h-4.5z"/></svg></a>
+      <a href="https://www.instagram.com/mo.albera/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a href="https://www.facebook.com/alberaDesigner" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v1.9H8v3.2h2.6V22H14v-10.3h2.7l.4-3.2H14z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> Mo Albera — محمد البيرة</span><span>مصراتة، ليبيا</span></div></footer>
+
+<a class="wa" href="https://wa.me/218945345203" target="_blank" rel="noopener" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
+
+<div class="lb" id="lb">
+  <button class="x" aria-label="إغلاق">✕</button>
+  <button class="prev" aria-label="السابق">›</button>
+  <button class="next" aria-label="التالي">‹</button>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+const BE='https://www.behance.net/gallery/';
+const WORK=[
+  {f:'vellano',t:'VÉLLANO — هوية علامة نظارات',c:'brand',l:'227008093/VELLANO'},
+  {f:'mamaafrica',t:'Mama Africa',c:'creative',l:'155299569/mama-africa'},
+  {f:'dusur',t:'DUSUR Maritime — هوية بصرية',c:'brand',l:'227292031/DUSUR'},
+  {f:'libya',t:'Libya — تصميم إبداعي',c:'creative',l:'153482077/Libya'},
+  {f:'flash',t:'FLASH Media — شعار وكالة إعلانية',c:'brand',l:'228286303/FLASH-Media'},
+  {f:'services',t:'حملة سوشيال ميديا — شركة خدمات',c:'social',l:'155014901/_'},
+  {f:'pixel',t:'Pixman — هوية بصرية',c:'brand',l:'228006933/Pixel'},
+  {f:'captain',t:'شارة الكابتن الفلسطينية',c:'social',l:'153701071/_'},
+  {f:'aburgaya',t:'Aburgaya Group — شعار',c:'brand',l:'152807425/Aburgaya-Group'},
+  {f:'pepsi',t:'إعلان غير رسمي — Pepsi',c:'creative',l:'153392705/_'},
+  {f:'aif',t:'Africa Investment Forum',c:'brand',l:'227450415/the-Africa-Investment-Forum'},
+  {f:'chess',t:'كش ملك — Check Mate',c:'creative',l:'152933617/_'},
+  {f:'lawday',t:'شعار اليوم العالمي للقانون',c:'social',l:'156090467/_'},
+  {f:'itday',t:'اليوم الوطني لتقنية المعلومات',c:'social',l:'153109603/_'},
+  {f:'merge',t:'محاولة دمج — Manipulation',c:'creative',l:'152582883/_'},
+  {f:'kdma',t:'خدمة — شعار',c:'brand',l:'153247781/-kdma'},
+  {f:'medx',t:'MEDx Misrata — شعار',c:'brand',l:'152317493/MEDx-Misrata'},
+  {f:'photographer',t:'Ali Maafa — شعار مصوّر',c:'brand',l:'152433205/photographer-logo'},
+];
+const CAT={brand:'هوية وشعار',social:'سوشيال ميديا',creative:'إعلان إبداعي'};
+
+// grid
+const grid=document.getElementById('grid');
+grid.innerHTML=WORK.map((w,i)=>`
+  <article class="item rv" data-c="${w.c}" data-i="${i}">
+    <div class="ph"><img src="work/${w.f}.jpg" alt="${w.t}" loading="lazy"></div>
+    <div class="cap"><h4>${w.t}</h4><span>${CAT[w.c]}</span></div>
+  </article>`).join('');
+
+// marquee
+const pick=['vellano','mamaafrica','dusur','libya','flash','captain','pixel','pepsi','services','chess','aif','itday'];
+const tr=document.getElementById('track');
+tr.innerHTML=[...pick,...pick].map(f=>`<img src="work/${f}.jpg" alt="">`).join('');
+
+// filters
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll('.item').forEach(it=>{
+    const show=f==='all'||it.dataset.c===f;
+    it.classList.toggle('hide',!show);
+  });
+});
+
+// lightbox
+let list=[],idx=0;
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
+function show(){const x=list[idx];lbImg.src='work/'+x.f;lbCap.innerHTML=x.t+(x.l?`<a href="${BE+x.l}" target="_blank" rel="noopener">شوف المشروع كامل على Behance ←</a>`:'');}
+function open(l,i){list=l;idx=i;show();lb.classList.add('open');document.body.style.overflow='hidden';}
+function close(){lb.classList.remove('open');document.body.style.overflow='';}
+grid.addEventListener('click',e=>{const it=e.target.closest('.item');if(!it)return;
+  const vis=[...document.querySelectorAll('.item:not(.hide)')];
+  open(vis.map(v=>{const w=WORK[v.dataset.i];return{f:w.f+'.jpg',t:w.t,l:w.l}}),vis.indexOf(it));});
+const caseEls=[...document.querySelectorAll('[data-lb]')];
+caseEls.forEach((el,i)=>el.addEventListener('click',()=>open(caseEls.map(c=>({f:c.dataset.lb,t:c.dataset.t})),i)));
+lb.querySelector('.x').onclick=close;
+lb.querySelector('.next').onclick=e=>{e.stopPropagation();idx=(idx+1)%list.length;show();};
+lb.querySelector('.prev').onclick=e=>{e.stopPropagation();idx=(idx-1+list.length)%list.length;show();};
+lb.addEventListener('click',e=>{if(e.target===lb)close();});
+addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')close();
+  if(e.key==='ArrowLeft')lb.querySelector('.next').click();
+  if(e.key==='ArrowRight')lb.querySelector('.prev').click();});
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// close mobile menu on link
+document.querySelectorAll('.links a').forEach(a=>a.onclick=()=>document.getElementById('nav').classList.remove('open'));
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
