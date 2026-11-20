@@ -106,3 +106,23 @@ function motion(){
   document.addEventListener('pointermove',e=>{if(!last)return;const r=last.getBoundingClientRect();
     last.style.setProperty('--mx',(e.clientX-r.left)+'px');last.style.setProperty('--my',(e.clientY-r.top)+'px');},{passive:true});
 }
+
+/* ===== عرض المزيد: يورّي أول صفّين بس، والباقي بزر ===== */
+function clampMore(grid,rows,label){
+  if(!grid||!grid.children.length)return;
+  const kids=[...grid.children];
+  const wrap=document.createElement('div');wrap.className='more';grid.before(wrap);wrap.appendChild(grid);
+  const btn=document.createElement('button');btn.type='button';btn.className='more-btn';wrap.appendChild(btn);
+  const fit=()=>{
+    if(wrap.classList.contains('open'))return;
+    const cols=getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length||1;
+    const hidden=kids.length-cols*rows;
+    if(hidden<=0){wrap.classList.add('none');grid.style.maxHeight='';return;}
+    wrap.classList.remove('none');
+    const h=kids[0].offsetHeight,gap=parseFloat(getComputedStyle(grid).rowGap)||0;
+    grid.style.maxHeight=Math.round(h*rows+gap*rows+h*.42)+'px';
+    btn.innerHTML=`${label} <b>+${hidden}</b>`;
+  };
+  btn.onclick=()=>{grid.style.maxHeight=grid.scrollHeight+'px';wrap.classList.add('open');setTimeout(()=>{grid.style.maxHeight='none';},650);};
+  fit();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fit,150);},{passive:true});
+}
