@@ -34,6 +34,21 @@
       "desc": "شعارات وهويات بصرية لشركات وعلامات تجارية.",
       "projects": [
         {
+          "id": "pmwpi1jkpfi5",
+          "title": "VEMO",
+          "subtitle": "",
+          "date": "2023-08",
+          "client": "",
+          "cover": "work/1795210598003-2lh4c.webp",
+          "thumb": "work/t/1795210598003-2lh4c.webp",
+          "desc": "VM-VEMO\nتصميم شعار خاص بمتجر || VEMO\nهذا المتجر مختص بالبيع الحقائب👜 والأحذية👡\nتم التركيز على الحرفين VM كطلب من الزبون",
+          "gallery": [
+            "work/1795210642634-vyr0f.webp",
+            "work/1795210647567-lf4fw.webp"
+          ],
+          "link": ""
+        },
+        {
           "id": "pmwphznjmnnf",
           "title": "اتحاد طلبة كلية تقنية المعلومات_جامعة مصراتة Students Union of I.T",
           "subtitle": "",
