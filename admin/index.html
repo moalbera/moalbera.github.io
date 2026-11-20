@@ -146,12 +146,31 @@ async function loadData(){
   const j=await gh('/contents/data.json?ref='+BR+'&t='+Date.now());
   SHA=j.sha; D=JSON.parse(b64dec(j.content));
 }
+// يتابع الموقع لين التعديل يبان فعلاً
+let liveTimer;
+function watchLive(want){
+  clearTimeout(liveTimer);
+  let el=document.getElementById('liveSt');
+  if(!el){el=document.createElement('div');el.id='liveSt';
+    el.style.cssText='position:fixed;bottom:20px;left:20px;z-index:300;padding:12px 18px;border-radius:999px;background:#1c1c22;border:1px solid rgba(255,255,255,.2);font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.6)';
+    document.body.appendChild(el);}
+  el.style.display='';el.style.color='';el.textContent='⏳ جاري النشر على الموقع… (عادةً من دقيقة لـ 3 دقايق)';
+  const t0=Date.now();
+  const check=async()=>{
+    try{const r=await fetch('../data.json?v='+Date.now(),{cache:'no-store'});const live=await r.json();
+      if(JSON.stringify(live)===want){el.style.color='#7dffa8';el.textContent='✅ تو ظاهر في الموقع';liveTimer=setTimeout(()=>el.style.display='none',8000);return;}}catch(e){}
+    if(Date.now()-t0>8*60e3){el.style.color='#ffcf7d';el.textContent='النشر طوّل شوية. حدّث الموقع بعد دقايق.';return;}
+    liveTimer=setTimeout(check,6000);
+  };
+  liveTimer=setTimeout(check,6000);
+}
 async function saveData(){
   busy(true,'جاري الحفظ والنشر…');
   try{
     const j=await gh('/contents/data.json',{method:'PUT',body:JSON.stringify({message:'تحديث محتوى الموقع من لوحة التحكم',content:b64enc(JSON.stringify(D,null,2)+'\n'),sha:SHA,branch:BR})});
     SHA=j.content.sha; setDirty(false);
-    toast('تم الحفظ ✅ التعديلات تبان على الموقع خلال دقيقة تقريباً');
+    toast('تم الحفظ ✅ استنى شوية لين يتنشر في الموقع');
+    watchLive(JSON.stringify(D));
   }catch(e){
     if(e.status===409) toast('صار تعديل من مكان ثاني. حدّث الصفحة وعاود.',true);
     else if(e.status===403||e.status===404) toast('المفتاح ما عندهش صلاحية الكتابة (Contents: Read and write).',true);
