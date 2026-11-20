@@ -72,8 +72,15 @@ function loadData(){return fetch('data.json?v='+Date.now(),{cache:'no-store'}).t
 const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE=matchMedia('(pointer: fine)').matches;
 function splitText(el){
-  if(!el||REDUCED)return; const t=el.textContent; el.classList.add('split');
-  el.innerHTML=[...t].map((c,i)=>c===' '?' ':`<span class="ch" style="--i:${i}">${esc(c)}</span>`).join('');
+  if(!el||REDUCED)return; const t=el.textContent.trim(); el.classList.add('split');
+  // العربي لازم يقعد كلمة كاملة (لو تقسم حروفه تتفكك)، الإنجليزي بس يتقسم حرف حرف
+  if(/[\u0600-\u06FF]/.test(t)){
+    el.dir='auto';
+    el.innerHTML=t.split(/\s+/).map((w,i)=>`<span class="ch" style="--i:${i*2}">${esc(w)}</span>`).join(' ');
+  }else{
+    el.dir='ltr';
+    el.innerHTML=[...t].map((c,i)=>c===' '?' ':`<span class="ch" style="--i:${i}">${esc(c)}</span>`).join('');
+  }
 }
 function stagger(){ // تأخير متدرّج للعناصر اللي جنب بعض
   document.querySelectorAll('.grid,.services,.steps,.stats,.vids,.feature-grid,.cat-nav').forEach(g=>[...g.children].forEach((c,i)=>c.style.setProperty('--d',Math.min(i,8)*70+'ms')));
