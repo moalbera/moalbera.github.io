@@ -10,6 +10,7 @@ const get=(o,p)=>p.split('.').reduce((a,k)=>a?.[k],o);
 const yearOf=d=>String(d||'').slice(0,4);
 function fmtDate(d){const [y,m]=String(d||'').split('-');return m?MONTHS[+m-1]+' '+y:(y||'');}
 const waLink=C=>'https://wa.me/'+String(C.whatsapp||'').replace(/\D/g,'');
+const tOf=p=>'work/t/'+String(p||'').split('/').pop();
 const projUrl=p=>'project.html?id='+encodeURIComponent(p.id);
 
 function allProjects(D){const out=[];(D.categories||[]).forEach((c,ci)=>(c.projects||[]).forEach(p=>out.push({...p,ci,cat:c})));return out;}
@@ -66,7 +67,7 @@ function videoCard(v){
       <div class="vt"><h4>${esc(v.title)}</h4>${v.desc?`<p>${esc(v.desc)}</p>`:''}</div></div></a>`;
 }
 function parseViews(s){const m=String(s||'').trim().match(/^([\d.]+)\s*([KkMm])?/);if(!m)return 0;return parseFloat(m[1])*(/[Kk]/.test(m[2]||'')?1e3:/[Mm]/.test(m[2]||'')?1e6:1);}
-function loadData(){return fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json());}
+function loadData(){return window.DATA_P||fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json());}
 
 /* ===== MOTION: يخلّي الموقع حي ===== */
 const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;

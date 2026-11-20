@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=1795187396">
+<link rel="stylesheet" href="../style.css?v=1795188675">
 <style>
 body{min-height:100vh}
 .shell{width:min(1180px,100% - 32px);margin:0 auto;padding:100px 0 140px}
@@ -179,13 +179,15 @@ async function saveData(){
 }
 const tOf=p=>'work/t/'+String(p).split('/').pop();
 async function uploadImage(file){
-  const dataUrl=await resize(file,1800,.88);
-  const name='work/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.jpg';
-  await gh('/contents/'+name,{method:'PUT',body:JSON.stringify({message:'رفع صورة من لوحة التحكم',content:dataUrl.split(',')[1],branch:BR})});
-  // نسخة صغيرة خفيفة للمربعات في الموقع
-  const small=await resize(file,640,.8);
+  // صيغة WebP خفيفة (ولو المتصفح ما يدعمهاش نرجعوا لـ JPG)
+  const full=await resize(file,1400,.8);
+  const ext=full.startsWith('data:image/webp')?'webp':'jpg';
+  const name='work/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.'+ext;
+  await gh('/contents/'+name,{method:'PUT',body:JSON.stringify({message:'رفع صورة من لوحة التحكم',content:full.split(',')[1],branch:BR})});
+  // نسخة صغيرة للمربعات بنفس الاسم
+  const small=await resize(file,560,.74);
   await gh('/contents/'+tOf(name),{method:'PUT',body:JSON.stringify({message:'نسخة صغيرة للصورة',content:small.split(',')[1],branch:BR})});
-  previews[name]=dataUrl;previews[tOf(name)]=small;
+  previews[name]=full;previews[tOf(name)]=small;
   return name;
 }
 function resize(file,max,q){
@@ -193,7 +195,7 @@ function resize(file,max,q){
     const img=new Image(), url=URL.createObjectURL(file);
     img.onload=()=>{let w=img.naturalWidth,h=img.naturalHeight;const s=Math.min(1,max/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);
       const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);
-      URL.revokeObjectURL(url);res(c.toDataURL('image/jpeg',q));};
+      URL.revokeObjectURL(url);let d=c.toDataURL('image/webp',q);if(!d.startsWith('data:image/webp'))d=c.toDataURL('image/jpeg',q);res(d);};
     img.onerror=()=>rej(new Error('الصورة ما تفتحتش'));img.src=url;});
 }
 const src=p=>previews[p]||('../'+p);
