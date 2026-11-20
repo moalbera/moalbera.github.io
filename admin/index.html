@@ -127,7 +127,7 @@ input[type=month]{width:100%;font:inherit;font-size:15px;color:var(--text);backg
 
 <script>
 const REPO='moalbera/moalbera.github.io', BR='main', KEY='mo_admin_token';
-let TOK=localStorage.getItem(KEY)||'', D=null, SHA=null, dirty=false, TAB='works';
+let TOK=localStorage.getItem(KEY)||'', BASE=null, D=null, SHA=null, dirty=false, TAB='works';
 const previews={};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -144,7 +144,7 @@ const b64dec=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g,''
 
 async function loadData(){
   const j=await gh('/contents/data.json?ref='+BR+'&t='+Date.now());
-  SHA=j.sha; D=JSON.parse(b64dec(j.content));
+  SHA=j.sha; D=JSON.parse(b64dec(j.content)); BASE=JSON.parse(JSON.stringify(D));
 }
 // يتابع الموقع لين التعديل يبان فعلاً
 let liveTimer;
@@ -164,11 +164,55 @@ function watchLive(want){
   };
   liveTimer=setTimeout(check,6000);
 }
+/* دمج ثلاثي: base = اللي فتحت عليه، mine = تعديلاتك، theirs = آخر نسخة في GitHub */
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const isObj=x=>x&&typeof x==='object'&&!Array.isArray(x);
+function merge3(base,mine,theirs){
+  if(same(mine,base))return theirs;
+  if(same(theirs,base)||theirs===undefined)return mine;
+  if(isObj(mine)&&isObj(theirs)){
+    const b=isObj(base)?base:{},out={};
+    new Set([...Object.keys(theirs),...Object.keys(mine)]).forEach(k=>{
+      if(!(k in mine)&&(k in b))return;            // انت مسحته
+      if(!(k in theirs)&&(k in b)&&same(mine[k],b[k]))return;
+      out[k]=merge3(b[k],mine[k],theirs[k]);
+    });
+    return out;
+  }
+  if(Array.isArray(mine)&&Array.isArray(theirs)){
+    const b=Array.isArray(base)?base:[];
+    const hasId=a=>a.length&&a.every(x=>isObj(x)&&x.id);
+    if(hasId(mine)||hasId(theirs)){                 // قوائم مشاريع: ندمجوا بالـ id
+      const bm=new Map(b.map(x=>[x.id,x])),tm=new Map(theirs.map(x=>[x.id,x])),mm=new Map(mine.map(x=>[x.id,x]));
+      const out=mine.map(x=>merge3(bm.get(x.id),x,tm.get(x.id)));
+      theirs.forEach((x,i)=>{if(!mm.has(x.id)&&!bm.has(x.id))out.splice(Math.min(i,out.length),0,x);});
+      return out;
+    }
+    if(b.length===mine.length&&b.length===theirs.length&&mine.every(isObj))   // أقسام: عنصر بعنصر
+      return mine.map((x,i)=>merge3(b[i],x,theirs[i]));
+    if(mine.every(x=>typeof x==='string')&&b.length===theirs.length){         // مسارات صور تبدّلت
+      const ren=new Map(b.map((x,i)=>[x,theirs[i]]));
+      return mine.map(x=>ren.has(x)?ren.get(x):x);
+    }
+    return mine;
+  }
+  return mine;
+}
 async function saveData(){
   busy(true,'جاري الحفظ والنشر…');
   try{
-    const j=await gh('/contents/data.json',{method:'PUT',body:JSON.stringify({message:'تحديث محتوى الموقع من لوحة التحكم',content:b64enc(JSON.stringify(D,null,2)+'\n'),sha:SHA,branch:BR})});
-    SHA=j.content.sha; setDirty(false);
+    const put=()=>gh('/contents/data.json',{method:'PUT',body:JSON.stringify({message:'تحديث محتوى الموقع من لوحة التحكم',content:b64enc(JSON.stringify(D,null,2)+'\n'),sha:SHA,branch:BR})});
+    let j;
+    try{ j=await put(); }
+    catch(e){
+      if(e.status!==409&&e.status!==422) throw e;
+      // صار تعديل من مكان ثاني: نجيبوا آخر نسخة وندمجوا تعديلاتك فوقها
+      busy(true,'جاري دمج تعديلاتك مع آخر نسخة…');
+      const r=await gh('/contents/data.json?ref='+BR+'&t='+Date.now());
+      D=merge3(BASE,D,JSON.parse(b64dec(r.content))); SHA=r.sha;
+      j=await put();
+    }
+    SHA=j.content.sha; BASE=JSON.parse(JSON.stringify(D)); setDirty(false); draw();
     toast('تم الحفظ ✅ استنى شوية لين يتنشر في الموقع');
     watchLive(JSON.stringify(D));
   }catch(e){
