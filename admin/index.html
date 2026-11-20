@@ -269,7 +269,7 @@ const inp=(p,label,o={})=>`<label class="f">${label}<input type="${o.type||'text
 const ta=(p,label,hint='')=>`<label class="f">${label}<textarea data-p="${p}" dir="auto" style="${/desc|text|intro/.test(p)?'min-height:170px':''}">${esc(getP(p))}</textarea>${hint?`<span class="hint">${hint}</span>`:''}</label>`;
 
 /* ---------- TABS ---------- */
-const TABS=[['works','الأعمال'],['featured','المشروع المميز'],['videos','الفيديوهات'],['texts','النصوص الرئيسية'],['services','الخدمات وطريقة الشغل'],['about','عني'],['contact','التواصل']];
+const TABS=[['works','الأعمال'],['featured','المشروع المميز'],['videos','الفيديوهات'],['texts','النصوص الرئيسية'],['services','الخدمات وطريقة الشغل'],['about','عني'],['clients','الجهات'],['contact','التواصل']];
 function drawTabs(){$('#tabs').innerHTML=TABS.map(([k,t])=>`<button class="glass ${k===TAB?'on':''}" data-tab="${k}">${t}</button>`).join('');}
 $('#tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;TAB=b.dataset.tab;EDIT=null;draw();scrollTo(0,0);};
 function draw(){drawTabs();$('#view').innerHTML=V[TAB]();}
@@ -358,6 +358,22 @@ videos(){
       </div>`).join('')}
     </div></div>`;
 },
+clients(){
+  D.clients=D.clients||{show:true,title:'جهات تعاملت معاها',intro:'',items:[]};const CC=D.clients;
+  return `<div class="panel glass"><h3>الجهات اللي تعاملت معاها</h3><div class="sub">شعارات تطلع في قسم قبل "تواصل" في آخر الصفحة. أفضل حاجة شعار PNG بخلفية بيضا ولا شفافة.</div>
+    <label class="check" style="margin-bottom:18px"><input type="checkbox" data-p="clients.show" ${CC.show!==false?'checked':''}> اعرض القسم في الموقع</label>
+    <div class="row">${inp('clients.title','عنوان القسم')}${inp('clients.intro','الجملة تحت العنوان')}</div>
+  </div>
+  <div class="panel glass"><h3>الشعارات <span class="hint">(${CC.items.length})</span></h3><div class="sub">أول شعار يطلع في الأول. تقدر تختار أكثر من شعار مرة وحدة.</div>
+    <div class="items">
+      <button class="add" data-act="clAdd">＋ أضف شعارات<br><span class="hint">اختار صورة ولا أكثر</span></button>
+      ${CC.items.map((c,i)=>`<div class="it glass">
+        <div class="thumb" data-act="clImg" data-i="${i}" style="background:#f5f5f7;aspect-ratio:16/10"><img src="${esc(src(c.thumb||c.img))}" alt="" loading="lazy" style="object-fit:contain;padding:12px"><span>بدّل الشعار</span></div>
+        <div class="fields">${inp('clients.items.'+i+'.name','اسم الجهة (ما يظهرش، بس للبحث)')}</div>
+        <div class="tools"><button class="ib glass" data-act="clUp" data-i="${i}">→</button><button class="ib glass" data-act="clDown" data-i="${i}">←</button><button class="ib glass del" data-act="clDel" data-i="${i}">🗑</button></div>
+      </div>`).join('')}
+    </div></div>`;
+},
 texts(){
   return `<div class="panel glass"><h3>أول الصفحة</h3><div class="sub">الكلام اللي يشوفه الزائر أول ما يفتح الموقع.</div>
     <div class="row">${inp('site.name','الاسم الكبير',{ltr:1})}${inp('site.status','الشارة الصغيرة فوق (فاضية = ما تظهرش)')}</div>
@@ -424,6 +440,11 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(
     case 'gUp': move(P.gallery,ii,-1);break;
     case 'gDown': move(P.gallery,ii,1);break;
     case 'gDel': if(confirm('تمسح الصورة هذي؟')){P.gallery.splice(ii,1);setDirty(true);draw();}break;
+    case 'clAdd': withUpload(true,ps=>{ps.forEach(x=>D.clients.items.push({img:x,thumb:tOf(x),name:''}));});break;
+    case 'clImg': withUpload(false,ps=>{D.clients.items[ii].img=ps[0];D.clients.items[ii].thumb=tOf(ps[0]);});break;
+    case 'clUp': move(D.clients.items,ii,-1);break;
+    case 'clDown': move(D.clients.items,ii,1);break;
+    case 'clDel': if(confirm('تمسح الشعار؟')){D.clients.items.splice(ii,1);setDirty(true);draw();}break;
     case 'vAdd': withUpload(false,ps=>{D.videos.items.unshift({thumb:ps[0],thumbSmall:tOf(ps[0]),title:'فيديو جديد',desc:'',url:'',views:''});});break;
     case 'vThumb': withUpload(false,ps=>{D.videos.items[ii].thumb=ps[0];D.videos.items[ii].thumbSmall=tOf(ps[0]);});break;
     case 'vUp': move(D.videos.items,ii,-1);break;

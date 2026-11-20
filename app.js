@@ -84,7 +84,7 @@ function splitText(el){
   }
 }
 function stagger(){ // تأخير متدرّج للعناصر اللي جنب بعض
-  document.querySelectorAll('.grid,.services,.steps,.stats,.vids,.feature-grid,.cat-nav').forEach(g=>[...g.children].forEach((c,i)=>c.style.setProperty('--d',Math.min(i,8)*70+'ms')));
+  document.querySelectorAll('.grid,.services,.steps,.stats,.vids,.feature-grid,.cat-nav,.clients').forEach(g=>[...g.children].forEach((c,i)=>c.style.setProperty('--d',Math.min(i,8)*70+'ms')));
 }
 function counters(){
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;io.unobserve(en.target);

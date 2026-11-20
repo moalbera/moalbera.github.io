@@ -1355,5 +1355,92 @@
         "thumbSmall": "work/t/1154147122804579.webp"
       }
     ]
+  },
+  "clients": {
+    "show": true,
+    "title": "جهات تعاملت معاها",
+    "intro": "جامعات وشركات ونوادي ومؤسسات في ليبيا اشتغلت معاهم.",
+    "items": [
+      {
+        "img": "work/clients/c01.webp",
+        "name": "الاتحاد العام لطلبة جامعة مصراتة"
+      },
+      {
+        "img": "work/clients/c02.webp",
+        "name": "جامعة مصراتة"
+      },
+      {
+        "img": "work/clients/c03.webp",
+        "name": ""
+      },
+      {
+        "img": "work/clients/c04.webp",
+        "name": ""
+      },
+      {
+        "img": "work/clients/c05.webp",
+        "name": "Auto Mechanic Libya"
+      },
+      {
+        "img": "work/clients/c06.webp",
+        "name": "فوج المدينة مصراتة للكشافة والمرشدات"
+      },
+      {
+        "img": "work/clients/c07.webp",
+        "name": ""
+      },
+      {
+        "img": "work/clients/c08.webp",
+        "name": "School Debates مناظرات المدارس"
+      },
+      {
+        "img": "work/clients/c09.webp",
+        "name": "اتحاد طلبة كلية القانون مصراتة"
+      },
+      {
+        "img": "work/clients/c10.webp",
+        "name": ""
+      },
+      {
+        "img": "work/clients/c11.webp",
+        "name": "Alshomoo"
+      },
+      {
+        "img": "work/clients/c12.webp",
+        "name": "Rawahil رواحل"
+      },
+      {
+        "img": "work/clients/c13.webp",
+        "name": "Misurata Startups ستارت آب مصراتة"
+      },
+      {
+        "img": "work/clients/c14.webp",
+        "name": "مؤسسة الحوار والمناظرة"
+      },
+      {
+        "img": "work/clients/c15.webp",
+        "name": "Al Mesdah"
+      },
+      {
+        "img": "work/clients/c16.webp",
+        "name": "كلية القانون جامعة مصراتة"
+      },
+      {
+        "img": "work/clients/c17.webp",
+        "name": "نادي السويحلي الرياضي"
+      },
+      {
+        "img": "work/clients/c18.webp",
+        "name": "مؤسسة شباب 2040 للسلام والتنمية"
+      },
+      {
+        "img": "work/clients/c19.webp",
+        "name": "مخيم ريادي ليبيا"
+      },
+      {
+        "img": "work/clients/c20.webp",
+        "name": "اليوم الوطني لتقنية المعلومات National Technology Day"
+      }
+    ]
   }
 }
