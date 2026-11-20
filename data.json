@@ -814,6 +814,23 @@
       "desc": "بوستات وحملات لصفحات الشركات والمناسبات.",
       "projects": [
         {
+          "id": "pmwpiqunv9zb",
+          "title": "مؤسسة شباب 2040",
+          "subtitle": "",
+          "date": "2023-03",
+          "client": "",
+          "cover": "work/1795211779656-23unu.webp",
+          "thumb": "work/t/1795211779656-23unu.webp",
+          "desc": "تصاميم لصالح مؤسسة شباب 2040 لفتح باب العضوية",
+          "gallery": [
+            "work/1795211811450-bta2z.webp",
+            "work/1795211816120-4xj40.webp",
+            "work/1795211821196-jxtwd.webp",
+            "work/1795211825800-1kgtb.webp"
+          ],
+          "link": ""
+        },
+        {
           "id": "pmwph95ode75",
           "title": "نادي السويحلي الرياضي",
           "subtitle": "",
