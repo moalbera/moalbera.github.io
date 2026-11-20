@@ -48,7 +48,8 @@
             "work/1795095098651-9lxsj.jpg",
             "work/1795095101332-amko9.jpg"
           ],
-          "link": ""
+          "link": "",
+          "thumb": "work/t/1795095085902-6sq9j.jpg"
         },
         {
           "id": "flash",
@@ -64,7 +65,8 @@
             "work/p/flash-2.jpg",
             "work/p/flash-3.jpg"
           ],
-          "link": "https://www.behance.net/gallery/228286303/FLASH-Media"
+          "link": "https://www.behance.net/gallery/228286303/FLASH-Media",
+          "thumb": "work/t/flash.jpg"
         },
         {
           "id": "pixel",
@@ -79,7 +81,8 @@
             "work/p/pixel-1.jpg",
             "work/p/pixel-2.jpg"
           ],
-          "link": "https://www.behance.net/gallery/228006933/Pixel"
+          "link": "https://www.behance.net/gallery/228006933/Pixel",
+          "thumb": "work/t/pixel.jpg"
         },
         {
           "id": "aif",
@@ -95,7 +98,8 @@
             "work/p/aif-2.jpg",
             "work/p/aif-3.jpg"
           ],
-          "link": "https://www.behance.net/gallery/227450415/the-Africa-Investment-Forum"
+          "link": "https://www.behance.net/gallery/227450415/the-Africa-Investment-Forum",
+          "thumb": "work/t/aif.jpg"
         },
         {
           "id": "dusur",
@@ -114,7 +118,8 @@
             "work/p/dusur-5.jpg",
             "work/p/dusur-6.jpg"
           ],
-          "link": "https://www.behance.net/gallery/227292031/DUSUR"
+          "link": "https://www.behance.net/gallery/227292031/DUSUR",
+          "thumb": "work/t/dusur.jpg"
         },
         {
           "id": "vellano",
@@ -131,7 +136,8 @@
             "work/p/vellano-3.jpg",
             "work/p/vellano-4.jpg"
           ],
-          "link": ""
+          "link": "",
+          "thumb": "work/t/vellano.jpg"
         },
         {
           "id": "lawday",
@@ -144,7 +150,8 @@
           "gallery": [
             "work/p/lawday-0.jpg"
           ],
-          "link": "https://www.behance.net/gallery/156090467/_"
+          "link": "https://www.behance.net/gallery/156090467/_",
+          "thumb": "work/t/lawday.jpg"
         },
         {
           "id": "kdma",
@@ -162,7 +169,8 @@
             "work/p/kdma-4.jpg",
             "work/p/kdma-5.jpg"
           ],
-          "link": "https://www.behance.net/gallery/153247781/-kdma"
+          "link": "https://www.behance.net/gallery/153247781/-kdma",
+          "thumb": "work/t/kdma.jpg"
         },
         {
           "id": "photographer",
@@ -175,7 +183,8 @@
           "gallery": [
             "work/p/photographer-0.jpg"
           ],
-          "link": "https://www.behance.net/gallery/152433205/photographer-logo"
+          "link": "https://www.behance.net/gallery/152433205/photographer-logo",
+          "thumb": "work/t/photographer.jpg"
         }
       ]
     },
@@ -198,7 +207,8 @@
             "work/fb5.jpg",
             "work/fb1.jpg"
           ],
-          "link": "https://www.facebook.com/alberaDesigner"
+          "link": "https://www.facebook.com/alberaDesigner",
+          "thumb": "work/t/fb2.jpg"
         },
         {
           "id": "itday",
@@ -216,7 +226,8 @@
             "work/p/itday-4.jpg",
             "work/p/itday-5.jpg"
           ],
-          "link": "https://www.behance.net/gallery/153109603/_"
+          "link": "https://www.behance.net/gallery/153109603/_",
+          "thumb": "work/t/itday.jpg"
         },
         {
           "id": "medx",
@@ -240,7 +251,8 @@
             "work/p/medx-10.jpg",
             "work/p/medx-11.jpg"
           ],
-          "link": "https://www.behance.net/gallery/152317493/MEDx-Misrata"
+          "link": "https://www.behance.net/gallery/152317493/MEDx-Misrata",
+          "thumb": "work/t/medx.jpg"
         }
       ]
     },
@@ -264,7 +276,8 @@
             "work/p/services-3.jpg",
             "work/p/services-4.jpg"
           ],
-          "link": "https://www.behance.net/gallery/155014901/_"
+          "link": "https://www.behance.net/gallery/155014901/_",
+          "thumb": "work/t/services.jpg"
         },
         {
           "id": "captain",
@@ -278,7 +291,8 @@
             "work/p/captain-0.jpg",
             "work/p/captain-1.jpg"
           ],
-          "link": "https://www.behance.net/gallery/153701071/_"
+          "link": "https://www.behance.net/gallery/153701071/_",
+          "thumb": "work/t/captain.jpg"
         },
         {
           "id": "aburgaya",
@@ -294,7 +308,8 @@
             "work/p/aburgaya-2.jpg",
             "work/p/aburgaya-3.jpg"
           ],
-          "link": "https://www.behance.net/gallery/152807425/Aburgaya-Group"
+          "link": "https://www.behance.net/gallery/152807425/Aburgaya-Group",
+          "thumb": "work/t/aburgaya.jpg"
         }
       ]
     },
@@ -315,7 +330,8 @@
             "work/p/mamaafrica-0.jpg",
             "work/p/mamaafrica-1.jpg"
           ],
-          "link": "https://www.behance.net/gallery/155299569/mama-africa"
+          "link": "https://www.behance.net/gallery/155299569/mama-africa",
+          "thumb": "work/t/mamaafrica.jpg"
         },
         {
           "id": "libya",
@@ -329,7 +345,8 @@
             "work/p/libya-0.jpg",
             "work/p/libya-1.jpg"
           ],
-          "link": "https://www.behance.net/gallery/153482077/Libya"
+          "link": "https://www.behance.net/gallery/153482077/Libya",
+          "thumb": "work/t/libya.jpg"
         },
         {
           "id": "pepsi",
@@ -343,7 +360,8 @@
             "work/p/pepsi-0.jpg",
             "work/p/pepsi-1.jpg"
           ],
-          "link": "https://www.behance.net/gallery/153392705/_"
+          "link": "https://www.behance.net/gallery/153392705/_",
+          "thumb": "work/t/pepsi.jpg"
         },
         {
           "id": "chess",
@@ -356,7 +374,8 @@
           "gallery": [
             "work/p/chess-0.jpg"
           ],
-          "link": "https://www.behance.net/gallery/152933617/_"
+          "link": "https://www.behance.net/gallery/152933617/_",
+          "thumb": "work/t/chess.jpg"
         },
         {
           "id": "merge",
@@ -370,7 +389,8 @@
             "work/p/merge-0.jpg",
             "work/p/merge-1.jpg"
           ],
-          "link": "https://www.behance.net/gallery/152582883/_"
+          "link": "https://www.behance.net/gallery/152582883/_",
+          "thumb": "work/t/merge.jpg"
         }
       ]
     }
@@ -433,7 +453,8 @@
       "Aburgaya Group",
       "Khdma",
       "Ali Maafa"
-    ]
+    ],
+    "photo": "work/me.png"
   },
   "videos": {
     "show": true,
@@ -445,70 +466,80 @@
         "title": "لو خيروك: سالم ولا زياد؟",
         "desc": "واحد يبي يطير للغربة باش يبني مستقبله بعيد عن الواسطة، والثاني مقتنع إن النجاح ما يبيش غربة. انت لو كنت في مكانهم، شن تختار؟",
         "url": "https://www.facebook.com/reel/1140687891183008/",
-        "views": "2K"
+        "views": "2K",
+        "thumbSmall": "work/t/v-1140687891183008.jpg"
       },
       {
         "thumb": "work/v/1017757650193056.jpg",
         "title": "الشهادة ولا المهارة؟",
         "desc": "مفتاح شادها قراية، وعلي شادها كورسات وراخي عالشهادة… بين المستقبل والفلوس، انت مع منو؟",
         "url": "https://www.facebook.com/reel/1017757650193056/",
-        "views": "13K"
+        "views": "13K",
+        "thumbSmall": "work/t/v-1017757650193056.jpg"
       },
       {
         "thumb": "work/v/1016038757242716.jpg",
         "title": "لو خيروك 2: عميل يدفع واجد ولا عميل بلا تعديلات؟",
         "desc": "بين عميل يدفع واجد لكن تعديلاته واجد، وعميل فلوسه شوية لكن ما يطلبش تعديلات. تعرّف على طارق وفتحي.",
         "url": "https://www.facebook.com/reel/1016038757242716/",
-        "views": "14K"
+        "views": "14K",
+        "thumbSmall": "work/t/v-1016038757242716.jpg"
       },
       {
         "thumb": "work/v/884187373626126.jpg",
         "title": "لو خيروك 1: حسام ولا معاد؟",
         "desc": "حسام ومعاد، وكل واحد فيهم عنده طريقته الخاصة في الحياة. لو خيروك بينهم، شن تختار؟",
         "url": "https://www.facebook.com/reel/884187373626126/",
-        "views": "14K"
+        "views": "14K",
+        "thumbSmall": "work/t/v-884187373626126.jpg"
       },
       {
         "thumb": "work/v/577956678325032.jpg",
         "title": "الحرب بين السعر والجودة",
         "desc": "العميل اللي عنده أحلام كبيرة بس ميزانية نص شاورما.",
         "url": "https://www.facebook.com/reel/577956678325032/",
-        "views": "22K"
+        "views": "22K",
+        "thumbSmall": "work/t/v-577956678325032.jpg"
       },
       {
         "thumb": "work/v/551423914473404.jpg",
         "title": "العميل عمره ما حيفهمك",
         "desc": "لو انت ما عمرك تعاملت مع عميل… فأنت لسه ما شفت حاجة.",
         "url": "https://www.facebook.com/reel/551423914473404/",
-        "views": "33K"
+        "views": "33K",
+        "thumbSmall": "work/t/v-551423914473404.jpg"
       },
       {
         "thumb": "work/v/571633372116723.jpg",
         "title": "التصميم يبي يومين",
         "desc": "تقوله التصميم يبي يومين، يقولك نبيه بعد ساعتين. ظاهرة فيزيائية ما ليهاش حل.",
         "url": "https://www.facebook.com/reel/571633372116723/",
-        "views": "2.2K"
+        "views": "2.2K",
+        "thumbSmall": "work/t/v-571633372116723.jpg"
       },
       {
         "thumb": "work/v/492685706502290.jpg",
         "title": "مش لازم تكون بيكاسو",
         "desc": "كيف تكون مبدع بطريقتك، حتى لو مش أحسن واحد في العالم.",
         "url": "https://www.facebook.com/reel/492685706502290/",
-        "views": "2.4K"
+        "views": "2.4K",
+        "thumbSmall": "work/t/v-492685706502290.jpg"
       },
       {
         "thumb": "work/v/1900028680827398.jpg",
         "title": "الاستمرارية ولا ضربة معلّم؟",
         "desc": "التصميم بالاستمرارية ولا ضربة معلّم؟",
         "url": "https://www.facebook.com/reel/1900028680827398/",
-        "views": "2.6K"
+        "views": "2.6K",
+        "thumbSmall": "work/t/v-1900028680827398.jpg"
       },
       {
         "thumb": "work/v/1154147122804579.jpg",
         "title": "التصميم ضغطة زر؟",
         "desc": "يقولك التصميم ضغطة زر… كلمة كبيرة ما نتحملوهاش.",
         "url": "https://www.facebook.com/reel/1154147122804579/",
-        "views": "3.5K"
+        "views": "3.5K",
+        "thumbSmall": "work/t/v-1154147122804579.jpg"
       }
     ]
   }

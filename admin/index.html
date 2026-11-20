@@ -7,8 +7,8 @@
 <title>لوحة التحكم — Mo Albera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=1795105443">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=1795183150">
 <style>
 body{min-height:100vh}
 .shell{width:min(1180px,100% - 32px);margin:0 auto;padding:100px 0 140px}
@@ -79,22 +79,7 @@ input[type=month]{width:100%;font:inherit;font-size:15px;color:var(--text);backg
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true">
-  <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <filter id="b1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
-      <filter id="b3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
-      <linearGradient id="go" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff7a1a" stop-opacity="0"/><stop offset=".5" stop-color="#ff8a2a"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></linearGradient>
-      <linearGradient id="gs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fb3d9" stop-opacity="0"/><stop offset=".5" stop-color="#c9d6ee"/><stop offset="1" stop-color="#5b6c8e" stop-opacity="0"/></linearGradient>
-    </defs>
-    <g><ellipse cx="500" cy="500" rx="330" ry="150" fill="#1b2235" filter="url(#b3)" opacity=".9" transform="rotate(-18 500 500)"/></g>
-    <g>
-      <path d="M170 560 C 300 380, 520 330, 700 420 S 880 600, 760 640" fill="none" stroke="url(#gs)" stroke-width="70" filter="url(#b1)" opacity=".45"/>
-      <path d="M260 470 C 420 360, 600 360, 760 480" fill="none" stroke="url(#go)" stroke-width="26" filter="url(#b1)" opacity=".55"/>
-    </g>
-  </svg>
-</div>
-<div class="noise" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true"></div>
 
 <!-- LOGIN -->
 <div class="shell" id="loginView" style="display:none">
@@ -173,11 +158,15 @@ async function saveData(){
     else toast('ما قدرناش نحفظ: '+e.message,true);
   }finally{busy(false);}
 }
+const tOf=p=>'work/t/'+String(p).split('/').pop();
 async function uploadImage(file){
   const dataUrl=await resize(file,1800,.88);
   const name='work/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.jpg';
   await gh('/contents/'+name,{method:'PUT',body:JSON.stringify({message:'رفع صورة من لوحة التحكم',content:dataUrl.split(',')[1],branch:BR})});
-  previews[name]=dataUrl;
+  // نسخة صغيرة خفيفة للمربعات في الموقع
+  const small=await resize(file,640,.8);
+  await gh('/contents/'+tOf(name),{method:'PUT',body:JSON.stringify({message:'نسخة صغيرة للصورة',content:small.split(',')[1],branch:BR})});
+  previews[name]=dataUrl;previews[tOf(name)]=small;
   return name;
 }
 function resize(file,max,q){
@@ -353,7 +342,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(
   const a=b.dataset.act,ci=+b.dataset.c,ii=+b.dataset.i,C=D.categories[ci];
   const P=EDIT?D.categories[EDIT.ci].projects[EDIT.pi]:null;
   switch(a){
-    case 'addProj': withUpload(false,ps=>{C.projects.unshift({id:newId(),title:'مشروع جديد',subtitle:'',date:thisMonth(),client:'',cover:ps[0],desc:'',gallery:[],link:''});EDIT={ci,pi:0};});break;
+    case 'addProj': withUpload(false,ps=>{C.projects.unshift({id:newId(),title:'مشروع جديد',subtitle:'',date:thisMonth(),client:'',cover:ps[0],thumb:tOf(ps[0]),desc:'',gallery:[],link:''});EDIT={ci,pi:0};});break;
     case 'editProj': EDIT={ci,pi:ii};draw();scrollTo(0,0);break;
     case 'backList': EDIT=null;draw();scrollTo(0,0);break;
     case 'pUp': move(C.projects,ii,-1);break;
@@ -364,14 +353,14 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(
     case 'catDown': move(D.categories,ci,1);break;
     case 'catDel': if(confirm(C.projects.length?`القسم فيه ${C.projects.length} مشروع، كلهم حيتمسحوا. متأكد؟`:'متأكد تبي تمسح القسم؟')){D.categories.splice(ci,1);setDirty(true);draw();}break;
     case 'addCat': D.categories.push({title:'قسم جديد',en:'',desc:'',projects:[]});setDirty(true);draw();scrollTo(0,document.body.scrollHeight);break;
-    case 'pCover': withUpload(false,ps=>P.cover=ps[0]);break;
+    case 'pCover': withUpload(false,ps=>{P.cover=ps[0];P.thumb=tOf(ps[0]);});break;
     case 'gAdd': withUpload(true,ps=>{P.gallery=P.gallery||[];P.gallery.push(...ps);});break;
     case 'gReplace': withUpload(false,ps=>P.gallery[ii]=ps[0]);break;
     case 'gUp': move(P.gallery,ii,-1);break;
     case 'gDown': move(P.gallery,ii,1);break;
     case 'gDel': if(confirm('تمسح الصورة هذي؟')){P.gallery.splice(ii,1);setDirty(true);draw();}break;
-    case 'vAdd': withUpload(false,ps=>{D.videos.items.unshift({thumb:ps[0],title:'فيديو جديد',desc:'',url:'',views:''});});break;
-    case 'vThumb': withUpload(false,ps=>D.videos.items[ii].thumb=ps[0]);break;
+    case 'vAdd': withUpload(false,ps=>{D.videos.items.unshift({thumb:ps[0],thumbSmall:tOf(ps[0]),title:'فيديو جديد',desc:'',url:'',views:''});});break;
+    case 'vThumb': withUpload(false,ps=>{D.videos.items[ii].thumb=ps[0];D.videos.items[ii].thumbSmall=tOf(ps[0]);});break;
     case 'vUp': move(D.videos.items,ii,-1);break;
     case 'vDown': move(D.videos.items,ii,1);break;
     case 'vDel': if(confirm('تمسح الفيديو "'+D.videos.items[ii].title+'"؟')){D.videos.items.splice(ii,1);setDirty(true);draw();}break;

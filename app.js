@@ -31,7 +31,7 @@ function fillCommon(D){
 
 function projectCard(p){
   return `<a class="pcard glass spot rv" href="${projUrl(p)}">
-    <div class="ph"><img src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy">
+    <div class="ph"><img src="${esc(p.thumb||p.cover)}" alt="${esc(p.title)}" loading="lazy" decoding="async">
       <div class="ov"><span>شوف المشروع ←</span><span class="cnt">${(p.gallery||[]).length+1} صور</span></div></div>
     <div class="cap"><h4>${esc(p.title)}</h4>${p.date?`<span class="yr">${esc(yearOf(p.date))}</span>`:''}</div></a>`;
 }
@@ -60,7 +60,7 @@ const LB=(()=>{
 
 function videoCard(v){
   return `<a class="vcard glass spot" href="${esc(v.url)}" target="_blank" rel="noopener">
-    <div class="ph"><img src="${esc(v.thumb)}" alt="${esc(v.title)}" loading="lazy">
+    <div class="ph"><img src="${esc(v.thumbSmall||v.thumb)}" alt="${esc(v.title)}" loading="lazy" decoding="async">
       ${v.views?`<span class="views"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>${esc(v.views)}</span>`:''}
       <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
       <div class="vt"><h4>${esc(v.title)}</h4>${v.desc?`<p>${esc(v.desc)}</p>`:''}</div></div></a>`;
