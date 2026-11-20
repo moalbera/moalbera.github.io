@@ -713,21 +713,6 @@
           "thumb": "work/t/services.webp"
         },
         {
-          "id": "captain",
-          "title": "شارة الكابتن الفلسطينية",
-          "subtitle": "",
-          "date": "2022-09",
-          "client": "",
-          "cover": "work/captain.webp",
-          "desc": "",
-          "gallery": [
-            "work/p/captain-0.webp",
-            "work/p/captain-1.webp"
-          ],
-          "link": "https://www.behance.net/gallery/153701071/_",
-          "thumb": "work/t/captain.webp"
-        },
-        {
           "id": "aburgaya",
           "title": "Aburgaya Group — ترامنتينا",
           "subtitle": "",
@@ -751,6 +736,21 @@
       "en": "Creative & Manipulation",
       "desc": "أفكار إعلانية ودمج صور (Manipulation) بأسلوب سينمائي.",
       "projects": [
+        {
+          "id": "captain",
+          "title": "شارة الكابتن الفلسطينية",
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/captain.webp",
+          "desc": "",
+          "gallery": [
+            "work/p/captain-0.webp",
+            "work/p/captain-1.webp"
+          ],
+          "link": "https://www.behance.net/gallery/153701071/_",
+          "thumb": "work/t/captain.webp"
+        },
         {
           "id": "mamaafrica",
           "title": "Mama Africa",
