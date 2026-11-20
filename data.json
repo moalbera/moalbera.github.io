@@ -1255,18 +1255,8 @@
   ],
   "about": {
     "text": "أنا [[محمد البيرة]]، مصمم جرافيك وخريج تقنية معلومات من مصراتة. نؤمن إن التصميم الجيد مش بس شكل حلو — هو [[رسالة]] واضحة توصل بسرعة وتعلق في الذاكرة.",
-    "brandsLabel": "مشاريع وعلامات اشتغلت عليها",
-    "brands": [
-      "MUN Libya",
-      "FLASH Media",
-      "Pixman",
-      "DUSUR Maritime",
-      "VÉLLANO",
-      "MEDx Misrata",
-      "Aburgaya Group",
-      "Khdma",
-      "Ali Maafa"
-    ],
+    "brandsLabel": "",
+    "brands": [],
     "photo": "work/me.webp"
   },
   "videos": {
