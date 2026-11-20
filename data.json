@@ -343,21 +343,6 @@
           "link": ""
         },
         {
-          "id": "athropedia",
-          "title": "أثرُوبيدياً",
-          "subtitle": "",
-          "date": "2024-09",
-          "client": "",
-          "cover": "work/1795208384201-ouadl.webp",
-          "thumb": "work/t/1795208384201-ouadl.webp",
-          "desc": "تصميم شعار لموقع بإسم (أثرُوبيدياً)🗿\nهو موقع يقدم خدمات تتعلق بالآثار والتراث ويوفر الموقع معلومات مفصلة عن الآثار والمواقع الأثرية، مما يساعد الزوار على فهم تاريخ الحضارات السابقة وثقافاتها🏺🔍\nبالإضافة إلى ذلك، يوفر الموقع خدمة بيع تحف أثرية، حيث يمكن للمهتمين بجمع القطع الأثرية شراء قطع نادرة وفريدة\nوبجانب ذلك يوفر خدمة حجز رحلات 🎟️ لاستكشاف الاماكن الاثرية",
-          "gallery": [
-            "work/1795208410970-t4ijd.webp",
-            "work/1795208428193-l6qdi.webp"
-          ],
-          "link": ""
-        },
-        {
           "id": "pmwph5vyc5ja",
           "title": "الفرقة الثانية جوالة - فوج المدينة مصراتة",
           "subtitle": "",
@@ -385,6 +370,20 @@
             "work/1795209496824-dc8zy.webp",
             "work/1795209501183-jwssq.webp",
             "work/1795209505352-g1iuj.webp"
+          ],
+          "link": ""
+        },
+        {
+          "id": "riyadh-library",
+          "title": "مكتبة الرياض",
+          "subtitle": "",
+          "date": "2024-06",
+          "client": "",
+          "cover": "work/1795207974943-20lvv.webp",
+          "thumb": "work/t/1795207974943-20lvv.webp",
+          "desc": "",
+          "gallery": [
+            "work/1795208326349-lbe0e.webp"
           ],
           "link": ""
         },
@@ -621,20 +620,6 @@
           ],
           "link": "https://www.behance.net/gallery/152433205/photographer-logo",
           "thumb": "work/t/photographer.webp"
-        },
-        {
-          "id": "riyadh-library",
-          "title": "مكتبة الرياض",
-          "subtitle": "",
-          "date": "2024-06",
-          "client": "",
-          "cover": "work/1795207974943-20lvv.webp",
-          "thumb": "work/t/1795207974943-20lvv.webp",
-          "desc": "",
-          "gallery": [
-            "work/1795208326349-lbe0e.webp"
-          ],
-          "link": ""
         }
       ]
     },
