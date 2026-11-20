@@ -313,3 +313,4 @@ nav .nav-in{background:rgba(12,12,16,.88)}
 .about .me img{position:relative;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent)}
 .about .me-txt{display:flex;flex-direction:column;gap:34px;padding-bottom:clamp(28px,5vw,64px)}
 @media (max-width:860px){.about.has-me{grid-template-columns:1fr}.about .me{max-width:280px;margin:0 auto;order:2}.about .me-txt{padding-bottom:0}}
+[hidden]{display:none!important}
