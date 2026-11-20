@@ -623,25 +623,6 @@
           "thumb": "work/t/lawday.webp"
         },
         {
-          "id": "kdma",
-          "title": "خدمة — Kdma",
-          "subtitle": "",
-          "date": "2022-09",
-          "client": "",
-          "cover": "work/kdma.webp",
-          "desc": "kdma-خدمة\nتوفر في المساحات المشتركة والمكاتب الخاصة لأصحاب الشركات الناشئة ورواد الأعمال، في مكان نضمنو فيه راحتك وإنتاجيتك في بيئة عمل نظيفة، مميزة، خدمية، ومنتجة في وسط مدينة مصراتة",
-          "gallery": [
-            "work/p/kdma-0.webp",
-            "work/p/kdma-1.webp",
-            "work/p/kdma-2.webp",
-            "work/p/kdma-3.webp",
-            "work/p/kdma-4.webp",
-            "work/p/kdma-5.webp"
-          ],
-          "link": "https://www.behance.net/gallery/153247781/-kdma",
-          "thumb": "work/t/kdma.webp"
-        },
-        {
           "id": "photographer",
           "title": "Ali Maafa — شعار مصوّر",
           "subtitle": "",
@@ -868,6 +849,25 @@
       "en": "Social Media",
       "desc": "بوستات وحملات لصفحات الشركات والمناسبات.",
       "projects": [
+        {
+          "id": "kdma",
+          "title": "خدمة — Kdma",
+          "subtitle": "",
+          "date": "2022-09",
+          "client": "",
+          "cover": "work/kdma.webp",
+          "desc": "kdma-خدمة\nتوفر في المساحات المشتركة والمكاتب الخاصة لأصحاب الشركات الناشئة ورواد الأعمال، في مكان نضمنو فيه راحتك وإنتاجيتك في بيئة عمل نظيفة، مميزة، خدمية، ومنتجة في وسط مدينة مصراتة",
+          "gallery": [
+            "work/p/kdma-0.webp",
+            "work/p/kdma-1.webp",
+            "work/p/kdma-2.webp",
+            "work/p/kdma-3.webp",
+            "work/p/kdma-4.webp",
+            "work/p/kdma-5.webp"
+          ],
+          "link": "https://www.behance.net/gallery/153247781/-kdma",
+          "thumb": "work/t/kdma.webp"
+        },
         {
           "id": "pmwpj2j68bkg",
           "title": "اتحاد طلبة الطب البشري - جامعة مصراته",
