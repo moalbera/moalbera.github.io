@@ -335,3 +335,56 @@ nav .nav-in{background:rgba(12,12,16,.88)}
 .more-btn:hover{background:rgba(255,255,255,.14);transform:translateX(-50%) translateY(-2px)}
 .more-btn b{font-weight:600;color:var(--orange);direction:ltr}
 .more.open .more-btn,.more.none .more-btn{display:none}
+
+/* ===== ORDER PAGE ===== */
+.od{max-width:860px;padding-top:150px;padding-bottom:40px}
+.od-head{text-align:center;margin-bottom:44px}
+.od-head h1{font-size:clamp(34px,5.4vw,60px);font-weight:600;letter-spacing:-.02em;line-height:1.2;margin:22px 0 14px}
+.od-head .sub{color:var(--muted);font-weight:300;font-size:17px;max-width:560px;margin:0 auto}
+.od-types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.od-type{position:relative;text-align:right;display:flex;flex-direction:column;gap:10px;padding:28px 24px 24px;border-radius:28px;color:var(--text);font:inherit;cursor:pointer;transition:transform .35s,border-color .35s;min-height:250px}
+.od-type:hover{transform:translateY(-4px);border-color:rgba(255,122,26,.55)}
+.od-type .n{position:absolute;top:22px;left:24px;font-size:13px;color:var(--dim)}
+.od-type .ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:24px;color:var(--orange);background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.25);margin-bottom:8px}
+.od-type b{font-size:21px;font-weight:600;line-height:1.35}
+.od-type .d{color:var(--muted);font-size:14.5px;font-weight:300;line-height:1.65}
+.od-type .go{margin-top:auto;padding-top:10px;color:var(--orange);font-weight:500;font-size:14.5px}
+.od-form{display:block}
+.od-back{background:none;border:0;color:var(--muted);font:inherit;font-size:14.5px;cursor:pointer;padding:6px 0;margin-bottom:8px}
+.od-back:hover{color:#fff}
+.od-h{font-size:14px;font-weight:500;color:var(--orange);letter-spacing:.04em;margin:38px 0 14px;padding-bottom:12px;border-bottom:1px solid var(--stroke)}
+.od-f{margin-bottom:22px}
+.od-l{display:block;font-size:15.5px;font-weight:500;margin-bottom:10px}
+.od-l i{color:var(--orange);font-style:normal}
+.od-f input[type=text],.od-f input[type=tel],.od-f input[type=email],.od-f input[type=date],.od-f textarea{width:100%;background:rgba(255,255,255,.045);border:1px solid var(--stroke);border-radius:16px;padding:15px 18px;color:var(--text);font:inherit;font-size:15.5px;transition:border-color .25s,background .25s;color-scheme:dark}
+.od-f textarea{min-height:110px;resize:vertical;line-height:1.7}
+.od-f input:focus,.od-f textarea:focus{outline:none;border-color:rgba(255,122,26,.7);background:rgba(255,255,255,.07)}
+.od-f input::placeholder,.od-f textarea::placeholder{color:var(--dim)}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-block;padding:11px 18px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);font-size:14.5px;transition:.2s}
+.chip:hover span{border-color:var(--stroke-2)}
+.chip input:checked+span{background:#fff;color:#000;border-color:#fff;font-weight:500}
+.chip input:focus-visible+span{outline:2px solid var(--orange);outline-offset:2px}
+.od-msg{display:block;font-size:13px;color:#ff8a8a;min-height:0;margin-top:6px}
+.od-f.bad input,.od-f.bad textarea{border-color:#ff6b6b}
+.od-f.bad .chip span{border-color:rgba(255,107,107,.6)}
+.od-submit{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:36px;padding-top:26px;border-top:1px solid var(--stroke)}
+.od-submit .hint{color:var(--dim);font-size:13.5px}
+.od-submit .btn[disabled]{opacity:.6;cursor:wait}
+.od-err{margin-top:24px;padding:16px 20px;border-radius:16px;background:rgba(255,90,90,.1);border:1px solid rgba(255,90,90,.35);font-size:15px}
+.od-err a{color:#fff;text-decoration:underline}
+.od-done{text-align:center;border-radius:36px;padding:54px 24px}
+.od-done .ok{width:68px;height:68px;margin:0 auto 20px;border-radius:50%;display:grid;place-items:center;font-size:30px;background:#fff;color:#000}
+.od-done h2{font-size:clamp(26px,4vw,38px);font-weight:600;margin-bottom:10px}
+.od-done p{color:var(--muted);margin-bottom:28px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+@media (max-width:760px){
+  .od{padding-top:120px}
+  .od-types{grid-template-columns:1fr;gap:12px}
+  .od-type{min-height:0;padding:22px 20px 20px;border-radius:22px}
+  .od-type .ic{width:44px;height:44px;font-size:20px;border-radius:13px}
+  .od-submit .btn{width:100%}
+}
+.od-f [dir=ltr]{text-align:right}
