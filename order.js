@@ -150,7 +150,13 @@ async function send(e){
   if(out['الإيميل']) body._replyto=out['الإيميل'];
   const wa='https://wa.me/'+String(D.contact.whatsapp||'').replace(/\D/g,'')+'?text='+encodeURIComponent(waText(out));
   try{
-    const r=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(to),{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
+    const key=(D.contact.web3key||'').trim(); let r;
+    if(key){ // Web3Forms (الأساسي)
+      r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({access_key:key,subject:body._subject,from_name:'موقع Mo Albera',...(body._replyto?{replyto:body._replyto}:{}),'نوع الطلب':body['نوع الطلب'],...out})});
+    } else { // FormSubmit (احتياطي)
+      r=await fetch('https://formsubmit.co/ajax/'+encodeURIComponent(to),{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)});
+    }
     const j=await r.json().catch(()=>({}));
     if(!r.ok||String(j.success)!=='true') throw new Error(j.message||'send failed');
     $('#form').hidden=true; $('#done').hidden=false; $('#waNext').href=wa;
