@@ -17,17 +17,16 @@ const FORMS={
       {k:'شن تحتاج بالضبط؟',type:'radio',req:1,o:['شعار بس','شعار + هوية بصرية كاملة','تجديد شعار موجود']},
       {k:'الاسم اللي يتكتب في الشعار',type:'text',req:1,ph:'بالعربي و/أو الإنجليزي، زي ما تبيه يطلع'},
       {k:'مجال النشاط',type:'textarea',req:1,ph:'شن تدير بالضبط؟ وشن اللي يميزك على غيرك؟'},
-      {k:'الجمهور المستهدف',type:'text',ph:'مثلاً: شباب، عائلات، شركات، طلبة…'},
-      {k:'3 كلمات توصف علامتك',type:'text',ph:'مثلاً: فخم، بسيط، عصري'},
+      {k:'لمين موجّه شغلك؟',type:'text',ph:'مثلاً: شباب، عائلات، شركات، طلبة…'},
+      {k:'تبي الناس تحس بشنو لما تشوف الشعار؟',type:'text',ph:'مثلاً: فخامة، ثقة، شباب ومرح، بساطة'},
       {h:'الشكل'},
-      {k:'نوع الشعار اللي يعجبك',type:'check',o:['كتابة بس','رمز + كتابة','رمز/أيقونة بس','مش متأكد، نبي رأيك']},
-      {k:'الألوان',type:'text',ph:'ألوان تبيها، أو ألوان ما تبيهاش'},
+      {k:'شكل الشعار اللي يعجبك',type:'check',vis:1,hint:'تقدر تختار أكثر من واحد. الصور مجرد توضيح.',o:[{"v": "كتابة بس", "svg": "<svg viewBox=\"0 0 160 90\"><text x=\"80\" y=\"56\" text-anchor=\"middle\" font-family=\"Rubik,sans-serif\" font-weight=\"700\" font-size=\"34\" fill=\"#fff\">Sama<tspan fill=\"#ff7a1a\">.</tspan></text></svg>", "d": "اسمك بخط مميز، من غير رسمة"}, {"v": "رسمة + كتابة", "svg": "<svg viewBox=\"0 0 160 90\"><circle cx=\"42\" cy=\"45\" r=\"17\" fill=\"#ff7a1a\"/><path d=\"M25 47.55h34M27.55 53.5h28.9\" stroke=\"#14141a\" stroke-width=\"2.7\" stroke-linecap=\"round\"/><text x=\"68\" y=\"56\" font-family=\"Rubik,sans-serif\" font-weight=\"700\" font-size=\"28\" fill=\"#fff\">Sama</text></svg>", "d": "رمز صغير جنب الاسم، وهو الأكثر استعمالاً"}, {"v": "رسمة بس", "svg": "<svg viewBox=\"0 0 160 90\"><circle cx=\"80\" cy=\"45\" r=\"27\" fill=\"#ff7a1a\"/><path d=\"M53 49.05h54M57.05 58.5h45.9\" stroke=\"#14141a\" stroke-width=\"4.3\" stroke-linecap=\"round\"/></svg>", "d": "رمز يتعرف من غير ما يتكتب الاسم"}, {"v": "حرف أول", "svg": "<svg viewBox=\"0 0 160 90\"><rect x=\"54\" y=\"19\" width=\"52\" height=\"52\" rx=\"15\" fill=\"none\" stroke=\"#ff7a1a\" stroke-width=\"3.5\"/><text x=\"80\" y=\"58\" text-anchor=\"middle\" font-family=\"Rubik,sans-serif\" font-weight=\"700\" font-size=\"32\" fill=\"#fff\">S</text></svg>", "d": "أول حرف من الاسم بشكل مميز"}, {"v": "مش متأكد، نبي رأيك", "svg": "<svg viewBox=\"0 0 160 90\"><circle cx=\"80\" cy=\"45\" r=\"25\" fill=\"none\" stroke=\"rgba(255,255,255,.35)\" stroke-width=\"3\" stroke-dasharray=\"6 6\"/><text x=\"80\" y=\"56\" text-anchor=\"middle\" font-family=\"Rubik,sans-serif\" font-weight=\"600\" font-size=\"30\" fill=\"#ff7a1a\">?</text></svg>", "d": "نختارولك الأنسب لنشاطك"}]},
+      {k:'الألوان',type:'text',ph:'مثلاً: أزرق وذهبي (اختياري)'},
       {k:'عناصر الهوية المطلوبة',type:'check',show:'شن تحتاج بالضبط؟=شعار + هوية بصرية كاملة',o:['كروت شخصية','أوراق رسمية وفواتير','قوالب سوشيال ميديا','يونيفورم','تغليف','لافتات ويافطات','دليل الهوية (Brand guide)']},
-      {k:'أمثلة عجبتك',type:'textarea',ph:'روابط لشعارات أو حسابات يعجبك ستايلها (اختياري)',ltr:1},
+      {k:'أمثلة عجبتك',type:'textarea',ph:'لو شفت شعار ولا صفحة عجبك شكلها، حط رابطها هني (اختياري)',ltr:1},
       {k:'الشعار الحالي',type:'text',show:'شن تحتاج بالضبط؟=تجديد شعار موجود',ph:'رابط للشعار الحالي، وشن اللي ما يعجبكش فيه',ltr:1},
-      {h:'الموعد والميزانية'},
+      {h:'الموعد'},
       {k:'متى تحتاجه؟',type:'radio',req:1,o:WHEN},
-      {k:'الميزانية التقريبية',type:'text',ph:'اختياري، لو تحب تحددها'},
       {k:'ملاحظات إضافية',type:'textarea',ph:'أي حاجة تبي تضيفها'},
     ]},
   social:{
@@ -38,15 +37,14 @@ const FORMS={
       {k:'رابط صفحتك',type:'text',ph:'لو عندك صفحة شغالة',ltr:1},
       {k:'مجال النشاط',type:'textarea',req:1,ph:'شن تدير، ولمين تحكي؟'},
       {h:'التصاميم'},
-      {k:'نوع التصاميم',type:'check',req:1,o:['بوستات','ستوريز','كاروسيل','غلاف الصفحة','إعلانات ممولة','غلاف ريلز']},
+      {k:'نوع التصاميم',type:'check',req:1,o:['بوستات','ستوريز','كاروسيل (بوست فيه أكثر من صورة)','غلاف الصفحة','إعلانات ممولة','غلاف الريلز']},
       {k:'نوع الشغل',type:'radio',req:1,o:['طلب لمرة وحدة','باقة شهرية']},
       {k:'كم تصميم تقريباً؟',type:'text',ph:'مثلاً: 10 بوستات، أو 12 تصميم في الشهر'},
-      {k:'عندك هوية بصرية جاهزة؟',type:'radio',o:['أيه، شعار وألوان وخطوط','عندي شعار بس','لا، ما عنديش']},
-      {k:'الكلام والمحتوى',type:'radio',o:['جاهز من عندي','نبيكم تكتبوه']},
-      {k:'أمثلة عجبتك',type:'textarea',ph:'روابط لحسابات أو تصاميم يعجبك ستايلها (اختياري)',ltr:1},
-      {h:'الموعد والميزانية'},
+      {k:'عندك شعار وألوان ثابتة لصفحتك؟',type:'radio',o:['أيه، عندي شعار وألوان','عندي شعار بس','لا، ما عنديش']},
+      {k:'الكلام اللي يتكتب في التصاميم',type:'radio',o:['أنا نكتبه','نبيكم تكتبوه']},
+      {k:'أمثلة عجبتك',type:'textarea',ph:'لو شفت صفحة ولا تصاميم عجبك شكلها، حط رابطها هني (اختياري)',ltr:1},
+      {h:'الموعد'},
       {k:'متى تبي تبدأ؟',type:'radio',req:1,o:WHEN},
-      {k:'الميزانية التقريبية',type:'text',ph:'اختياري، لو تحب تحددها'},
       {k:'ملاحظات إضافية',type:'textarea',ph:'أي حاجة تبي تضيفها'},
     ]},
   event:{
@@ -60,13 +58,12 @@ const FORMS={
       {k:'الجهة المنظمة والرعاة',type:'textarea',ph:'المنظم، الشركاء، والرعاة (لو فيه). هل شعاراتهم جاهزة؟'},
       {k:'عدد الحضور المتوقع',type:'text',ph:'تقريباً (اختياري)'},
       {h:'المطلوب'},
-      {k:'شن تحتاج؟',type:'check',req:1,o:['شعار الفعالية','هوية بصرية للفعالية','بوستات إعلان وعدّ تنازلي','تصاميم المتحدثين والفقرات','بانرات ورول أب','خلفية المنصة (Backdrop)','بطاقات تعريف (Badges)','شهادات','دعوات','تيشيرتات','تصاميم شاشات']},
-      {k:'مقاسات الطباعة',type:'text',ph:'لو تعرفها (اختياري)'},
-      {k:'عندكم هوية للفعالية؟',type:'radio',o:['أيه، جاهزة','عندنا شعار بس','لا، نبوها من الصفر']},
-      {k:'أمثلة عجبتك',type:'textarea',ph:'روابط لفعاليات يعجبك ستايلها (اختياري)',ltr:1},
-      {h:'الموعد والميزانية'},
+      {k:'شن تحتاج؟',type:'check',req:1,o:['شعار الفعالية','هوية بصرية للفعالية','بوستات إعلان وعدّ تنازلي','تصاميم المتحدثين والفقرات','بانرات ورول أب','الخلفية الكبيرة ورا المنصة','بطاقات تعريف الحضور','شهادات','دعوات','تيشيرتات','تصاميم شاشات']},
+      {k:'مقاسات الطباعة',type:'text',ph:'لو تعرفها، وإلا خليها فاضية ونحددوها مع بعض'},
+      {k:'عندكم شعار وألوان للفعالية؟',type:'radio',o:['أيه، جاهزين','عندنا شعار بس','لا، نبوها من الصفر']},
+      {k:'أمثلة عجبتك',type:'textarea',ph:'لو شفت فعالية عجبك شكل تصاميمها، حط رابطها هني (اختياري)',ltr:1},
+      {h:'الموعد'},
       {k:'آخر موعد تحتاج فيه التصاميم',type:'date',req:1},
-      {k:'الميزانية التقريبية',type:'text',ph:'اختياري، لو تحب تحددها'},
       {k:'ملاحظات إضافية',type:'textarea',ph:'أي حاجة تبي تضيفها'},
     ]},
 };
@@ -90,11 +87,15 @@ function field(x){
   const dir=x.ltr?' dir="ltr"':' dir="auto"';
   let inner;
   if(x.type==='textarea') inner=`<textarea id="${id}" name="${esc(x.k)}"${dir} placeholder="${esc(x.ph||'')}" ${x.req?'required':''}></textarea>`;
+  else if(x.vis){
+    const t=x.type==='radio'?'radio':'checkbox';
+    inner=`<div class="vchips">${x.o.map(o=>`<label class="vchip"><input type="${t}" name="${esc(x.k)}" value="${esc(o.v)}"><span><i>${o.svg}</i><b>${esc(o.v)}</b><small>${esc(o.d)}</small></span></label>`).join('')}</div>`;
+  }
   else if(x.type==='radio'||x.type==='check'){
     const t=x.type==='radio'?'radio':'checkbox';
     inner=`<div class="chips" role="group">${x.o.map(o=>`<label class="chip"><input type="${t}" name="${esc(x.k)}" value="${esc(o)}"><span>${esc(o)}</span></label>`).join('')}</div>`;
   } else inner=`<input id="${id}" type="${x.type}" name="${esc(x.k)}"${dir} placeholder="${esc(x.ph||'')}" ${x.req?'required':''}>`;
-  return `<div class="od-f" data-k="${esc(x.k)}" data-type="${x.type}"${x.req?' data-req':''}${show}><label class="od-l" for="${id}">${esc(x.k)}${req}</label>${inner}<span class="od-msg"></span></div>`;
+  return `<div class="od-f" data-k="${esc(x.k)}" data-type="${x.type}"${x.req?' data-req':''}${show}><label class="od-l" for="${id}">${esc(x.k)}${req}</label>${x.hint?`<span class="od-hint">${esc(x.hint)}</span>`:''}${inner}<span class="od-msg"></span></div>`;
 }
 
 function pick(k,noPush){

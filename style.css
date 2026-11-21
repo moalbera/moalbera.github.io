@@ -388,3 +388,16 @@ nav .nav-in{background:rgba(12,12,16,.88)}
   .od-submit .btn{width:100%}
 }
 .od-f [dir=ltr]{text-align:right}
+.od-hint{display:block;color:var(--dim);font-size:13.5px;margin:-4px 0 12px}
+.vchips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.vchip{position:relative;cursor:pointer}
+.vchip input{position:absolute;opacity:0;pointer-events:none}
+.vchip>span{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;height:100%;padding:10px 10px 14px;border-radius:18px;border:1px solid var(--stroke);background:rgba(255,255,255,.035);transition:.2s}
+.vchip i{display:block;font-style:normal;direction:ltr;width:100%;border-radius:12px;background:#14141a;margin-bottom:6px}
+.vchip svg{display:block;width:100%;height:auto;direction:ltr;unicode-bidi:isolate}
+.vchip b{font-size:15px;font-weight:600}
+.vchip small{font-size:12.5px;color:var(--muted);line-height:1.5}
+.vchip:hover>span{border-color:var(--stroke-2)}
+.vchip input:checked+span{border-color:var(--orange);background:rgba(255,122,26,.1);box-shadow:0 0 0 1px var(--orange) inset}
+.vchip input:focus-visible+span{outline:2px solid var(--orange);outline-offset:2px}
+@media (max-width:640px){.vchips{grid-template-columns:repeat(2,minmax(0,1fr))}}
